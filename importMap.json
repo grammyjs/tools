@@ -1,5 +1,6 @@
 {
   "imports": {
+    "std/": "https://deno.land/std@0.178.0/",
     "react": "https://esm.sh/react@18.2.0?dev",
     "react/": "https://esm.sh/react@18.2.0/",
     "react-dom": "https://esm.sh/react-dom@18.2.0",
@@ -10,6 +11,7 @@
     "react-router-dom/server": "https://esm.sh/react-router-dom@6.3.0/server?external=react",
 
     "ultra/": "https://deno.land/x/ultra@v2.2.1/",
-    "unocss-cli": "https://esm.sh/@unocss/cli@0.50.3"
+    "unocss-core": "https://esm.sh/@unocss/core@0.50.3",
+    "unocss-preset-wind": "https://esm.sh/@unocss/preset-wind@0.50.3?bundle&no-check"
   }
 }
