@@ -1,6 +1,6 @@
 import { serve } from "https://deno.land/std@0.176.0/http/server.ts";
 import { type Context, createServer } from "ultra/server.ts";
-import { build } from "unocss-cli";
+import { build } from "./unocss.ts";
 import App from "./src/app.tsx";
 
 // React Router
@@ -30,11 +30,7 @@ server.get("*", async (context) => {
   });
 });
 if (import.meta.main) {
-  await build({
-    patterns: ["src/**/*"],
-    outFile: "public/main.css",
-    watch: true,
-  });
+  await build();
   serve(server.fetch);
 }
 export default server;
