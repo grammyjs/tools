@@ -1,4 +1,5 @@
 {
+  "lock": false,
   "tasks": {
     "dev": "deno run -A --no-check --watch ./server.tsx",
     "test": "deno test --allow-all",
