@@ -1,10 +1,13 @@
 import { expandGlob } from "std/fs/expand_glob.ts";
-import { type Preset, UnoGenerator } from "unocss-core";
+import { createGenerator, type Preset } from "unocss-core";
 import presetWind from "unocss-preset-wind";
 
 export async function build() {
-  const generator = new UnoGenerator({
+  const generator = createGenerator({
     presets: [presetWind() as unknown as Preset],
+    theme: {
+      colors: { background: "var(--background)" },
+    },
   });
   const styles = new Array<string>();
 

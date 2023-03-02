@@ -2,7 +2,7 @@ import useAsset from "ultra/hooks/use-asset.js";
 
 export const getFontStyles = () => `/* red-hat-display-700 - latin-ext_latin */
 @font-face {
-    font-display: optional;
+    font-display: swap;
     font-family: "Red Hat Display";
     font-style: normal;
     font-weight: 700;
@@ -13,7 +13,7 @@ export const getFontStyles = () => `/* red-hat-display-700 - latin-ext_latin */
 }
 /* noto-sans-display-700 - cyrillic-ext_cyrillic */
 @font-face {
-    font-display: optional;
+    font-display: swap;
     font-family: "Noto Sans Display";
     font-style: normal;
     font-weight: 700;
@@ -24,7 +24,7 @@ export const getFontStyles = () => `/* red-hat-display-700 - latin-ext_latin */
 }
 /* red-hat-text-regular - latin-ext_latin */
 @font-face {
-    font-display: optional;
+    font-display: swap;
     font-family: "Red Hat Text";
     font-style: normal;
     font-weight: 400;
@@ -35,7 +35,7 @@ export const getFontStyles = () => `/* red-hat-display-700 - latin-ext_latin */
 }
 /* red-hat-text-italic - latin-ext_latin */
 @font-face {
-    font-display: optional;
+    font-display: swap;
     font-family: "Red Hat Text";
     font-style: italic;
     font-weight: 400;
@@ -46,7 +46,7 @@ export const getFontStyles = () => `/* red-hat-display-700 - latin-ext_latin */
 }
 /* red-hat-text-600 - latin-ext_latin */
 @font-face {
-    font-display: optional;
+    font-display: swap;
     font-family: "Red Hat Text";
     font-style: normal;
     font-weight: 600;
@@ -56,7 +56,7 @@ export const getFontStyles = () => `/* red-hat-display-700 - latin-ext_latin */
 }
 /* noto-sans-regular - cyrillic-ext_cyrillic */
 @font-face {
-    font-display: optional;
+    font-display: swap;
     font-family: "Noto Sans";
     font-style: normal;
     font-weight: 400;
@@ -67,7 +67,7 @@ export const getFontStyles = () => `/* red-hat-display-700 - latin-ext_latin */
 }
 /* noto-sans-italic - cyrillic-ext_cyrillic */
 @font-face {
-    font-display: optional;
+    font-display: swap;
     font-family: "Noto Sans";
     font-style: italic;
     font-weight: 400;
@@ -78,7 +78,7 @@ export const getFontStyles = () => `/* red-hat-display-700 - latin-ext_latin */
 }
 /* noto-sans-600 - cyrillic-ext_cyrillic */
 @font-face {
-    font-display: optional;
+    font-display: swap;
     font-family: "Noto Sans";
     font-style: normal;
     font-weight: 600;
@@ -89,7 +89,7 @@ export const getFontStyles = () => `/* red-hat-display-700 - latin-ext_latin */
 }
 /* source-code-pro-regular - latin */
 @font-face {
-    font-display: optional;
+    font-display: swap;
     font-family: "Source Code Pro";
     font-style: normal;
     font-weight: 400;
