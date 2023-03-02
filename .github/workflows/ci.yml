@@ -1,0 +1,23 @@
+name: ci
+
+on: push
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: denoland/setup-deno@v1
+        with:
+          deno-version: v1.x
+
+
+      - run: deno task build
+
+
+    - name: Cache Deno dependencies 
+      uses: actions/cache@v3
+      with:
+        path: ~/.cache/deno
+        key: ${{ hashFiles('importMap.json') }}
