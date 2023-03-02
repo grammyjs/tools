@@ -1,4 +1,5 @@
 import { createBuilder } from "ultra/build.ts";
+import { build } from "unocss-cli";
 
 const builder = createBuilder({
   browserEntrypoint: import.meta.resolve("./client.tsx"),
@@ -13,6 +14,11 @@ builder.ignore([
   "./.github/**",
   "./.gitignore",
 ]);
+
+await build({
+  patterns: ["src/**/*"],
+  outFile: "public/main.css",
+});
 
 // deno-lint-ignore no-unused-vars
 const result = await builder.build();

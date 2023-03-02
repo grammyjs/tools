@@ -9,6 +9,7 @@
     "react-router-dom": "https://esm.sh/react-router-dom@6.3.0?external=react",
     "react-router-dom/server": "https://esm.sh/react-router-dom@6.3.0/server?external=react",
 
-    "ultra/": "https://deno.land/x/ultra@v2.2.1/"
+    "ultra/": "https://deno.land/x/ultra@v2.2.1/",
+    "unocss-cli": "https://esm.sh/@unocss/cli@0.50.3"
   }
 }
