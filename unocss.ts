@@ -6,7 +6,10 @@ export async function build() {
   const generator = createGenerator({
     presets: [presetWind() as unknown as Preset],
     theme: {
-      colors: { background: "var(--background)" },
+      colors: {
+        foreground: "var(--foreground)",
+        background: "var(--background)",
+      },
     },
   });
   const styles = new Array<string>();

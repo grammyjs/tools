@@ -7,8 +7,8 @@
     "react-dom/server": "https://esm.sh/react-dom@18.2.0/server?dev",
     "react-dom/client": "https://esm.sh/react-dom@18.2.0/client?dev",
 
-    "react-router-dom": "https://esm.sh/react-router-dom@6.3.0?external=react",
-    "react-router-dom/server": "https://esm.sh/react-router-dom@6.3.0/server?external=react",
+    "react-router-dom": "https://esm.sh/react-router-dom@6.8.2?external=react",
+    "react-router-dom/server": "https://esm.sh/react-router-dom@6.8.2/server?external=react",
 
     "ultra/": "https://deno.land/x/ultra@v2.2.1/",
     "unocss-core": "https://esm.sh/@unocss/core@0.50.3",
