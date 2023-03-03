@@ -5,10 +5,13 @@ import presetWind from "unocss-preset-wind";
 export async function build() {
   const generator = createGenerator({
     presets: [presetWind() as unknown as Preset],
+    shortcuts: { "link": "text-grammy hover:underline" },
     theme: {
       colors: {
         foreground: "var(--foreground)",
         background: "var(--background)",
+        "translucentbackground": "var(--translucentbackground)",
+        grammy: "#009dca",
       },
     },
   });
