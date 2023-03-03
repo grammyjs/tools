@@ -1,8 +1,6 @@
 import hydrate from "ultra/hydrate.js";
-import App from "./src/app.tsx";
-
-// React Router
 import { BrowserRouter } from "react-router-dom";
+import App from "./src/app.tsx";
 
 function ClientApp() {
   return (
