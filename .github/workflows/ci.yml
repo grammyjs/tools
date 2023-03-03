@@ -12,12 +12,9 @@ jobs:
         with:
           deno-version: v1.x
 
-
       - run: deno task build
 
-
-    - name: Cache Deno dependencies 
-      uses: actions/cache@v3
-      with:
-        path: ~/.cache/deno
-        key: ${{ hashFiles('importMap.json') }}
+      - uses: actions/cache@v3
+        with:
+          path: ~/.cache/deno
+          key: ${{ hashFiles('importMap.json') }}
