@@ -2,6 +2,7 @@
   --foreground: #181a1e;
   --background: #ffffff;
   --translucentbackground: #ffffffee;
+  --altbackground: #eeeeee;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -9,5 +10,6 @@
     --foreground: #ffffff;
     --background: #181a1e;
     --translucentbackground: #181a1eee;
+    --altbackground: #1f2127;
   }
 }
