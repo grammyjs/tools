@@ -4,7 +4,8 @@
     "dev": "deno run -A --no-check --watch ./server.tsx",
     "test": "deno test --allow-all",
     "build": "deno run -A ./build.ts",
-    "start": "ULTRA_MODE=production deno run -A --no-remote ./server.js"
+    "start": "ULTRA_MODE=production deno run -A --no-remote ./server.js",
+    "update-filter-queries": "cd src/filter_query_browser && deno run -A prepare.ts && deno fmt mod.ts filter.ts"
   },
   "compilerOptions": {
     "jsx": "react-jsxdev",
