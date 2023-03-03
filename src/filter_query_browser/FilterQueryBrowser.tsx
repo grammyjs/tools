@@ -10,7 +10,7 @@ function slug(str: string) {
 
 const list = (q: string) =>
   filterQueries
-    .filter(({ query }) => query.toLowerCase().includes(q.toLowerCase()))
+    .filter(({ query }) => query.includes(q.toLowerCase()))
     .map(({ query, doc }) => {
       return (
         <details key={query} className="py-1 my-2">
