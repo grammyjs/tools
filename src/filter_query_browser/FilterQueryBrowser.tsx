@@ -44,7 +44,7 @@ export default function FilterQueryBrowser() {
         value={q}
         onChange={(e) => setQ(e.target.value)}
         placeholder={`Search among ${filterQueries.length} filter queries...`}
-        className="py-3 w-full b-b-1 b-gray-900 @dark:b-gray-100 bg-inherit focus:outline-none px-0.5"
+        className="p-3 w-full bg-altbackground focus:outline-none placeholder:opacity-80 dark:placeholder:opacity-50"
       />
       <div className="py-4">{list(q)}</div>
     </Main>

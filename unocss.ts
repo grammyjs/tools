@@ -11,6 +11,7 @@ export async function build() {
         foreground: "var(--foreground)",
         background: "var(--background)",
         "translucentbackground": "var(--translucentbackground)",
+        "altbackground": "var(--altbackground)",
         grammy: "#009dca",
       },
     },
