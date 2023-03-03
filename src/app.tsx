@@ -10,20 +10,6 @@ const FilterQueryBrowser = lazy(
 );
 const _404 = lazy(() => import("./routes/_404.tsx"));
 
-// <header className="px-4 py-2 sticky top-0 bg-translucentbackground b-b b-gray-200 @dark:b-gray-800">
-//           <div className="text-lg select-none">
-//             <Link
-//               to="/"
-//               className="hover:opacity-70 font-['Red_Hat_Display'] font-bold"
-//             >
-//               grammY tools
-//             </Link>{" "}{" "}
-//             <a href="#" className="hover:opacity-70">
-//               Filter Query Browser
-//             </a>
-//           </div>
-//         </header>
-
 const tools: Record<string, string> = {
   "/filter-query-browser": "Filter Query Browser",
 };
@@ -45,7 +31,7 @@ export default function App() {
       </head>
       <body className="bg-background text-foreground">
         <header className="px-4 py-2 sticky top-0 bg-translucentbackground b-b b-gray-200 @dark:b-gray-800">
-          <div className="select-none flex flex-col">
+          <div className="max-w-screen-sm mx-auto select-none flex flex-col">
             {typeof tools[location.pathname] === "string" ? (
               <>
                 <Link
