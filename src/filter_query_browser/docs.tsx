@@ -26,13 +26,7 @@ const PREFIX_DOCS = {
       You need to specify this update in <code>allowed_updates</code>{" "}
       to receive them.
     </b>
-  ),
-  chat_join_request: (
-    <b>
-      You need to specify this update in <code>allowed_updates</code>{" "}
-      to receive them.
-    </b>
-  ),
+  ), 
 };
 
 export function generate() {
