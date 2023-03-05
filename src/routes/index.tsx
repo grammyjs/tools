@@ -5,10 +5,16 @@ export default function Index() {
   return (
     <>
       <Main>
-        <Link to="/filter-query-browser" className="link">
-          Filter Query Browser
-        </Link>
-        <a className="link" href="https://tg-updates.vercel.app" target="_blank" rel="noreferrer">Update Visualizer</a>
+        <ul className="flex flex-col gap-2">
+          <li>
+            <Link to="/filter-query-browser" className="link">
+              Filter Query Browser
+            </Link>
+          </li>
+          <li>
+            <a className="link" href="https://tg-updates.vercel.app" target="_blank" rel="noreferrer">Update Visualizer</a>
+          </li>
+        </ul>
       </Main>
     </>
   );
