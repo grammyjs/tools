@@ -8,7 +8,7 @@ export default function Index() {
         <Link to="/filter-query-browser" className="link">
           Filter Query Browser
         </Link>
-        <a href="https://tg-updates.vercel.app" target="_blank" rel="noreferrer">Update Visualizer</a>
+        <a className="link" href="https://tg-updates.vercel.app" target="_blank" rel="noreferrer">Update Visualizer</a>
       </Main>
     </>
   );
