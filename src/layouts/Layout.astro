@@ -1,0 +1,66 @@
+---
+import "@mdi/font/css/materialdesignicons.css";
+import "vuetify/styles";
+import "/public/preflight.css";
+import "/public/vars.css";
+export interface Props {
+  title?: string;
+}
+
+const { title } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+  </head>
+  <body class="bg-background text-foreground">
+    <header class="bg-translucentbackground b-b b-gray-200 @dark:b-gray-800 sticky top-0 px-4 py-2">
+      <div class="mx-auto flex max-w-screen-sm select-none flex-col">
+        {
+          title && (
+            <a href="/" class="font-['Red_Hat_Display'] text-xs font-bold hover:opacity-70">
+              {" "}
+              grammY tools
+            </a>
+          )
+        }
+        {
+          !title && (
+            <a href="/" class="font-['Red_Hat_Display'] text-lg font-bold hover:opacity-70">
+              {" "}
+              grammY tools
+            </a>
+          )
+        }
+        {
+          title && (
+            <a href="#" class="text-lg hover:opacity-70">
+              {title}
+            </a>
+          )
+        }
+      </div>
+    </header>
+    <slot />
+  </body>
+</html>
+<style is:global>
+  :root {
+    --accent: 124, 58, 237;
+    --accent-gradient: linear-gradient(45deg, rgb(var(--accent)), #da62c4 30%, white 60%);
+  }
+  html {
+    font-family: system-ui, sans-serif;
+    background-color: #f6f6f6;
+  }
+  code {
+    font-family: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New,
+      monospace;
+  }
+</style>
