@@ -1,4 +1,84 @@
 <script setup lang="ts">
+import { onMounted, ref, shallowRef } from "vue";
+import StartIcon from "../icons/StartIcon.vue";
+import StopIcon from "../icons/StopIcon.vue";
+import Empty from "./Empty.vue";
+
+type States = "idle" | "starting" | "listening" | "stopping" | "stopped";
+
+const token = ref("");
+const state = ref<States>("idle");
+
+const toggleState = () => {
+  state.value = state.value === "idle" ? "listening" : "idle";
+};
+
+const stateIs = (...states: States[]) => states.includes(state.value);
+
+const value = ref();
+
+const Editor = shallowRef<typeof Empty | typeof import("json-editor-vue")["default"]>(Empty);
+onMounted(async () => {
+  const component = await import("json-editor-vue");
+  Editor.value = component.default;
+});
+</script>
+<template>
+  <main class="flex flex-1 flex-col bg-translucentbackground">
+    <section class="mx-auto w-full max-w-screen-sm">
+      <div class="relative w-full max-w-screen-sm">
+        <div class="absolute bottom-10 right-9 flex cursor-pointer items-center" @click="toggleState">
+          <StartIcon stroke="green" class="absolute h-7 w-7 text-slate-400" v-if="stateIs('idle', 'stopped')" />
+          <StopIcon stroke="red" class="absolute h-7 w-7 text-slate-400" v-else />
+        </div>
+        <input
+          id="token"
+          v-model="token"
+          type="text"
+          placeholder="Token obtained from talking to @botfather"
+          class="mb-4 w-full bg-altbackground p-3 placeholder:opacity-80 focus:outline-none dark:placeholder:opacity-50"
+        />
+      </div>
+    </section>
+    <section class="grid flex-1 grid-cols-12 border-t">
+      <div>
+        <div class="m-0 flex w-full flex-col border-b bg-gray-800 p-3 text-sm text-white">
+          <span>Message</span>
+          <span>13124324 - 16:20:35</span>
+        </div>
+        <div class="m-0 flex w-full flex-col border-b p-3 text-sm text-white">
+          <span>Message</span>
+          <span>13124324 - 16:20:35</span>
+        </div>
+        <div class="m-0 flex w-full flex-col border-b p-3 text-sm text-white">
+          <span>Message</span>
+          <span>13124324 - 16:20:35</span>
+        </div>
+        <div class="m-0 flex w-full flex-col border-b p-3 text-sm text-white">
+          <span>Message</span>
+          <span>13124324 - 16:20:35</span>
+        </div>
+      </div>
+      <div class="col-span-11 m-0 h-full w-full bg-altbackground p-0">
+        <component
+          :is="Editor"
+          :mode="'text'"
+          read-only
+          class="jse-theme-dark h-full"
+          :navigation-bar="false"
+          :main-menu-bar="false"
+          :status-bar="false"
+          v-model="value"
+        />
+      </div>
+    </section>
+  </main>
+</template>
+<style scoped>
+@import "https://cdn.jsdelivr.net/npm/vanilla-jsoneditor/themes/jse-theme-dark.css";
+</style>
+
+<!--<script setup lang="ts">
 import type { Update } from "grammy/types";
 import { Bot } from "grammy/web";
 import MonacoEditor from "monaco-editor-vue3";
@@ -230,3 +310,4 @@ const formatDate = (date: Date) =>
   height: 90%;
 }
 </style>
+-->

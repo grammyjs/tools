@@ -1,0 +1,29 @@
+---
+const { title } = Astro.props;
+---
+
+<header class="b-b b-gray-200 @dark:b-gray-800 sticky top-0 bg-translucentbackground px-4 py-2">
+  <div class="mx-auto flex max-w-screen-sm select-none flex-col">
+    {
+      title && (
+        <a href="/" class="font-['Red_Hat_Display'] text-xs font-bold hover:opacity-70">
+          grammY tools
+        </a>
+      )
+    }
+    {
+      !title && (
+        <a href="/" class="font-['Red_Hat_Display'] text-lg font-bold hover:opacity-70">
+          grammY tools
+        </a>
+      )
+    }
+    {
+      title && (
+        <a href="#" class="text-lg hover:opacity-70">
+          {title}
+        </a>
+      )
+    }
+  </div>
+</header>
