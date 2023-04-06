@@ -1,5 +1,5 @@
 ---
-import Header from "../components/Header.astro";
+import Header from '../components/Header.astro';
 import "../style/global.css";
 export interface Props {
   title?: string;
@@ -17,7 +17,7 @@ const { title } = Astro.props;
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
   </head>
-  <body class="bg-background text-foreground h-screen">
+  <body class="flex h-screen flex-col bg-background text-foreground scrollbar-hide">
     <Header title={title} />
     <slot />
   </body>
