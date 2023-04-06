@@ -1,8 +1,8 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import UpdateExplorer from "../components/vue/update-explorer/Explorer.vue";
+import UpdateExplorer from '../components/vue/update-explorer/Explorer.vue';
+import Flex from "../layouts/Flex.astro";
 ---
 
-<Layout title="Update Explorer">
-  <UpdateExplorer client:only />
-</Layout>
+<Flex title="Update Explorer">
+  <UpdateExplorer client:load />
+</Flex>
