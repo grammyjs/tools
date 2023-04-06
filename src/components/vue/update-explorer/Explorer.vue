@@ -4,6 +4,7 @@ import { Bot } from "grammy/web";
 import { computed, onMounted, ref, shallowRef, watch } from "vue";
 import StartIcon from "../icons/StartIcon.vue";
 import StopIcon from "../icons/StopIcon.vue";
+import TrashIcon from "../icons/TrashIcon.vue";
 import Empty from "./Empty.vue";
 import { isBusy, state, stateIs } from "./state";
 
@@ -29,6 +30,11 @@ const undecoratedSelectedUpdate = computed(() =>
     ? (({ type, timestamp, hasDownload, url, ...update }: DecoratedUpdate) => update)(selectedUpdate.value)
     : undefined
 );
+const clearUpdates = () => {
+  updatesList.value = [];
+  updatesMap.clear();
+  selectedUpdateId.value = 0;
+};
 
 // Listening
 const token = ref(localStorage.getItem("token") || "");
@@ -142,8 +148,8 @@ onMounted(async () => {
           @click="toggleListening()"
           :class="{ 'cursor-wait': isBusy, 'opacity-30': isBusy, 'animate-blink': stateIs('listening') }"
         >
-          <StartIcon stroke="green" class="absolute h-7 w-7 text-slate-400" v-if="stateIs('idle', 'stopped')" />
-          <StopIcon stroke="red" class="absolute h-7 w-7 text-slate-400" v-else />
+          <StartIcon class="absolute h-7 w-7 stroke-green-500" v-if="stateIs('idle', 'stopped')" />
+          <StopIcon class="absolute h-7 w-7 stroke-red-500" v-else />
         </div>
         <input
           :disabled="!stateIs('idle', 'stopped')"
@@ -157,7 +163,12 @@ onMounted(async () => {
     </section>
     <section class="flex flex-1 border-t">
       <div class="w-52">
-        <div class="border-b py-1 pl-2">Status: {{ stateLabel }}</div>
+        <div class="flex flex-row items-center justify-between border-b py-1 pl-2">
+          <span>Status: {{ stateLabel }}</span>
+          <button class="h-fit" @click="clearUpdates" v-if="updatesList.length" title="Clear updates">
+            <TrashIcon stroke="white" class="relative mr-2 h-5 w-5" />
+          </button>
+        </div>
         <div
           v-for="update in updatesList"
           :key="update.update_id"
