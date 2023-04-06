@@ -19,6 +19,10 @@ type DecoratedUpdate = Update & {
 // State variables
 const error = ref<Error>();
 const bot = ref<Bot>();
+const clearError = () => {
+  error.value = undefined;
+  state.value = "idle";
+};
 
 // Updates
 const updatesMap = new Map<number, DecoratedUpdate>();
@@ -37,9 +41,13 @@ const clearUpdates = () => {
 };
 
 // Listening
-const token = ref(localStorage.getItem("token") || "");
+const token = ref("");
 watch(token, (value) => {
   localStorage.setItem("token", value);
+});
+const hasToken = computed(() => Boolean(token.value));
+onMounted(() => {
+  token.value = localStorage.getItem("token") ?? "";
 });
 
 const toggleListening = () => {
@@ -118,7 +126,7 @@ const stateLabel = computed(() => {
     case "initializing":
       return "Initializing";
     case "listening":
-      return "Listening";
+      return `Listening as @${bot.value?.botInfo.username}`;
     case "stopping":
       return "Stopping";
     default:
@@ -141,16 +149,36 @@ onMounted(async () => {
 </script>
 <template>
   <main class="flex flex-1 flex-col bg-translucentbackground">
+    <div
+      v-if="error"
+      class="fixed inset-0 z-50 flex h-screen w-screen items-center justify-center overflow-y-auto bg-gray-600 bg-opacity-50"
+    >
+      <div class="w-96 rounded-md border-l-8 border-l-red-500 bg-altbackground p-5 shadow-lg">
+        <span class="text-lg font-bold">An error has occured</span>
+        <p class="text-sm">There was an unexpected error. Check the details below:</p>
+        <pre class="mt-3 bg-background">{{ JSON.stringify(error, null, 2) }}</pre>
+        <div class="flex w-full flex-row-reverse items-end">
+          <button
+            class="relative right-1 mt-4 rounded-md border bg-opacity-50 px-2 py-1 align-middle"
+            @click="clearError()"
+          >
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
     <section class="mx-auto w-full max-w-screen-sm">
       <div class="relative w-full max-w-screen-sm">
-        <div
-          class="absolute bottom-10 right-9 flex cursor-pointer items-center"
+        <button
+          type="button"
+          :disabled="isBusy || !hasToken"
+          class="absolute bottom-10 right-9 flex cursor-pointer items-center disabled:cursor-wait disabled:opacity-30"
           @click="toggleListening()"
-          :class="{ 'cursor-wait': isBusy, 'opacity-30': isBusy, 'animate-blink': stateIs('listening') }"
+          :class="{ 'animate-blink': stateIs('listening') }"
         >
-          <StartIcon class="absolute h-7 w-7 stroke-green-500" v-if="stateIs('idle', 'stopped')" />
-          <StopIcon class="absolute h-7 w-7 stroke-red-500" v-else />
-        </div>
+          <StartIcon class="absolute h-7 w-7 stroke-green-500" v-if="stateIs('idle', 'stopped', 'error')" />
+          <StopIcon class="absolute h-7 w-7 stroke-red-500" v-if="stateIs('initializing', 'listening', 'stopping')" />
+        </button>
         <input
           :disabled="!stateIs('idle', 'stopped')"
           id="token"
@@ -164,7 +192,7 @@ onMounted(async () => {
     <section class="flex flex-1 border-t">
       <div class="w-52">
         <div class="flex flex-row items-center justify-between border-b py-1 pl-2">
-          <span>Status: {{ stateLabel }}</span>
+          <span>{{ stateLabel }}</span>
           <button class="h-fit" @click="clearUpdates" v-if="updatesList.length" title="Clear updates">
             <TrashIcon stroke="white" class="relative mr-2 h-5 w-5" />
           </button>
