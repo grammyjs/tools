@@ -75,7 +75,7 @@
   --accent: 124, 58, 237;
   --accent-gradient: linear-gradient(45deg, rgb(var(--accent)), #da62c4 30%, white 60%);
   --foreground: #181a1e;
-  --background: #ffffff;
+  --grammy-background: #ffffff;
   --translucentbackground: #ffffffee;
   --altbackground: #eeeeee;
 }
@@ -83,7 +83,7 @@
 @media (prefers-color-scheme: dark) {
   :root {
     --foreground: #ffffff;
-    --background: #181a1e;
+    --grammy-background: #181a1e;
     --translucentbackground: #181a1eee;
     --altbackground: #1f2127;
   }
@@ -103,7 +103,7 @@ h6 {
   font-family: "Red Hat Display", "Noto Sans Display", system-ui, sans-serif;
 }
 
-code {
+pre, code {
   font-family: "Source Code Pro", Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono,
     Bitstream Vera Sans Mono, Courier New, monospace;
 }

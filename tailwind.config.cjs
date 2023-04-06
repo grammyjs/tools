@@ -8,7 +8,7 @@ module.exports = {
       },
       colors: {
         foreground: "var(--foreground)",
-        background: "var(--background)",
+        background: "var(--grammy-background)",
         "translucentbackground": "var(--translucentbackground)",
         "altbackground": "var(--altbackground)",
         grammy: "#009dca",
