@@ -1,7 +1,7 @@
 ---
 import "@mdi/font/css/materialdesignicons.css";
 import "vuetify/styles";
-import Header from "../components/astro/Header.astro";
+import Header from "../components/Header.astro";
 import "../style/global.css";
 export interface Props {
   title?: string;
@@ -19,7 +19,7 @@ const { title } = Astro.props;
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
   </head>
-  <body class="bg-background text-foreground">
+  <body class="bg-background text-foreground h-screen">
     <Header title={title} />
     <slot />
   </body>
