@@ -1,22 +1,22 @@
 ---
 export interface Props {
   title: string;
-  body: string;
+  body?: string;
   href: string;
+  alternate?: boolean;
+  newTab?: boolean;
 }
 
-const { href, title, body } = Astro.props;
+const { href, title, body, alternate, newTab } = Astro.props;
 ---
 
-<li class="link-card">
-  <a href={href}>
+<li class={alternate ? "link-card alternate" : "link-card"}>
+  <a href={href} target={newTab ? "_blank" : undefined}>
     <h2>
       {title}
       <span>&rarr;</span>
     </h2>
-    <p>
-      {body}
-    </p>
+    {body && <p>{body}</p>}
   </a>
 </li>
 <style>
@@ -55,9 +55,30 @@ const { href, title, body } = Astro.props;
   }
   .link-card:is(:hover, :focus-within) {
     background-position: 0;
-    background-image: var(--accent-gradient);
+    background-image: var(--grammy-gradient);
   }
   .link-card:is(:hover, :focus-within) h2 {
-    color: rgb(var(--accent));
+    color: var(--grammy);
+  }
+
+  .link-card.alternate {
+    background-image: var(--grammy-gradient);
+    background-position: 0;
+  }
+
+  .link-card.alternate > a > h2 {
+    color: var(--grammy);
+  }
+
+  .link-card.alternate > a {
+    opacity: 1;
+  }
+
+  .link-card.alternate:is(:hover, :focus-within) h2 {
+    color: var(--grammy);
+  }
+
+  .link-card.alternate:is(:hover, :focus-within) a {
+    opacity: 0.8;
   }
 </style>
