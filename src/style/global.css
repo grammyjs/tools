@@ -72,12 +72,14 @@
 }
 
 :root {
+  --grammy: #009dca;
   --accent: 124, 58, 237;
   --accent-gradient: linear-gradient(45deg, rgb(var(--accent)), #da62c4 30%, white 60%);
   --foreground: #181a1e;
   --grammy-background: #ffffff;
   --translucentbackground: #ffffffee;
   --altbackground: #eeeeee;
+  --grammy-gradient: linear-gradient(45deg, #3f6abf, var(--grammy) 30%, white 60%);
 }
 
 @media (prefers-color-scheme: dark) {
