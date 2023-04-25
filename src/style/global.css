@@ -73,6 +73,9 @@
 
 :root {
   --grammy: #009dca;
+  --grammy-darken-10: #008db5;
+  --grammy-darken-20: #007da1;
+  --grammy-darken-50: #004e65;
   --accent: 124, 58, 237;
   --accent-gradient: linear-gradient(45deg, rgb(var(--accent)), #da62c4 30%, white 60%);
   --foreground: #181a1e;
