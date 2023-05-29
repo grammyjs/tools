@@ -1,4 +1,8 @@
-lockfileVersion: '6.0'
+lockfileVersion: '6.1'
+
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
 
 dependencies:
   '@astrojs/react':
@@ -25,6 +29,9 @@ dependencies:
   grammy:
     specifier: ^1.15.1
     version: 1.15.3
+  grammy-vue:
+    specifier: ^0.0.4
+    version: 0.0.4(grammy@1.15.3)(vue@3.2.47)
   json-editor-vue:
     specifier: ^0.10.5
     version: 0.10.5(vanilla-jsoneditor@0.16.1)(vue@3.2.47)
@@ -4694,6 +4701,16 @@ packages:
 
   /graceful-fs@4.2.11:
     resolution: {integrity: sha512-RbJ5/jmFcNNCcDV5o9eTnBLJ/HszWV0P73bc+Ff4nS/rJj+YaS6IGyiOL0VoBYX+l1Wrl3k63h/KrH+nhJ0XvQ==}
+
+  /grammy-vue@0.0.4(grammy@1.15.3)(vue@3.2.47):
+    resolution: {integrity: sha512-PgSrAzFbZJxPx1569+6pfLjpaDj6ZXLAORdaR9c5y5dDuwK24GHZxYlFiifkBzMWUfOv1hgEfK6iPdhk3SAZjg==}
+    peerDependencies:
+      grammy: ^1.14.1
+      vue: ^3.2.47
+    dependencies:
+      grammy: 1.15.3
+      vue: 3.2.47
+    dev: false
 
   /grammy@1.15.3:
     resolution: {integrity: sha512-uqkF4AMWiZTSwwzBeprRIEiOg3yXT7Ray37bpg2ew5jaX+cuIG5AUm30S2Vr8ezghjLZKgAg2tRi+r9f9uvMrg==}

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-defineProps<{ disabled?: boolean }>();
+defineProps<{ disabled?: boolean, loading?: boolean }>();
 </script>
 <template>
   <button
@@ -19,6 +19,7 @@ defineProps<{ disabled?: boolean }>();
         'disabled:text-gray-700',
         'disabled:border-gray-700',
         'disabled:cursor-not-allowed',
+        loading ? 'animate-blink' : ''
       ].join(' ')
     "
   >
