@@ -1,14 +1,11 @@
 <script setup lang="ts">
-import { useTelegramApi } from "grammy-vue";
 import { computed } from "vue";
 import ErrorMessage from "../ErrorMessage.vue";
 import GrammyButton from "../GrammyButton.vue";
 import GrammyTextInput from "../GrammyTextInput.vue";
-import { persistentRef } from "../composables/persistentRef";
 import WebhookInfo from "./WebhookInfo.vue";
+import { token, useApiMethod } from './shared-storage'
 
-const token = persistentRef("token", "");
-const { useApiMethod } = useTelegramApi(token);
 const { refresh: getMe, state, data: botInfo } = useApiMethod("getMe");
 const disableLoadBotInfo = computed(() => !token.value || state.value === "loading");
 const clearToken = () => {
@@ -18,7 +15,7 @@ const clearToken = () => {
 </script>
 
 <template>
-  <div class="container mx-auto my-auto lg:px-96">
+  <div class="container mx-auto my-auto xl:px-52">
     <div class="rounded bg-altbackground p-10">
       <div v-show="state !== 'success'">
         <error-message class="mb-5" v-if="state === 'error'">
@@ -42,6 +39,7 @@ const clearToken = () => {
               type="submit"
               @click.prevent="getMe"
               :loading="state === 'loading'"
+              variant="primary"
             >
               load bot info
             </grammy-button>

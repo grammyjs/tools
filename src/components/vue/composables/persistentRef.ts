@@ -1,12 +1,10 @@
-import { onMounted, ref, watch } from "vue";
+import { ref, watch } from "vue";
 
 export function persistentRef<TValue>(itemName: string, initialValue: TValue) {
   const _ref = ref<TValue>(initialValue);
-  
-  onMounted(() => {
-    const item = localStorage.getItem(itemName)
-    if (item) _ref.value = JSON.parse(item)
-  })
+
+  const item = localStorage.getItem(itemName);
+  if (item) _ref.value = JSON.parse(item);
 
   watch(_ref, (value) => {
     if (value === undefined) return localStorage.removeItem(itemName);
