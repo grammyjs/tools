@@ -1,0 +1,28 @@
+---
+import Flex from "../layouts/Flex.astro";
+
+const shades = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950];
+const colors = ["slate", "red", "green", "grammy"];
+---
+
+<Flex title="Colors">
+  <div class="lg:mx-52 mt-10 p-10 bg-altbackground border rounded-lg">
+    {
+      colors
+        .map((color) => (
+          <div class={`mb-2 grid grid-cols-12`}>
+            <span class="col-span-1 w-full capitalize">{color}</span>
+            {shades.map((shade) => (
+              <div
+                class={`bg-${color}-${shade} mb-1 aspect-square w-full first-of-type:rounded-s-xl last-of-type:rounded-e-xl`}
+              />
+            ))}
+          </div>
+        ))
+        .flat()
+    }
+    <div class="mb-2 grid grid-cols-12">
+      <span class="col-span-1"></span>{shades.map((shade) => <div class="col-span-1 text-center">{shade}</div>)}
+    </div>
+  </div>
+</Flex>
