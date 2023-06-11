@@ -4,7 +4,7 @@ import ErrorMessage from "../ErrorMessage.vue";
 import GrammyButton from "../GrammyButton.vue";
 import GrammyTextInput from "../GrammyTextInput.vue";
 import WebhookInfo from "./WebhookInfo.vue";
-import { token, useApiMethod } from './store'
+import { token, useApiMethod } from "./store";
 
 const { refresh: getMe, state, data: botInfo } = useApiMethod("getMe");
 const disableLoadBotInfo = computed(() => !token.value || state.value === "loading");

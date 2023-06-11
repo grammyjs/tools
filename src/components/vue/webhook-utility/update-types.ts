@@ -13,11 +13,8 @@ export const DEFAULT_UPDATE_TYPES = [
   "poll_answer",
   "my_chat_member",
   "chat_join_request",
-] as const
+] as const;
 
-export const ALL_UPDATE_TYPES = [
-...DEFAULT_UPDATE_TYPES,
-"chat_member"
-] as const
+export const ALL_UPDATE_TYPES = [...DEFAULT_UPDATE_TYPES, "chat_member"] as const;
 
-export type UpdateTypes = typeof ALL_UPDATE_TYPES[number]
+export type UpdateTypes = (typeof ALL_UPDATE_TYPES)[number];

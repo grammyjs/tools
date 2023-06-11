@@ -53,7 +53,7 @@ const setWebhook = withRefresh(() => {
   return setWebhookRaw(newUrl.value, {
     drop_pending_updates: dropPendingUpdates.value,
     secret_token: secret.value,
-    allowed_updates: newAllowedUpdates.value
+    allowed_updates: newAllowedUpdates.value,
   });
 });
 
