@@ -8,14 +8,16 @@ import GrammyInfo from "../GrammyInfo.vue";
 import ExternalIcon from "../icons/ExternalIcon.vue";
 import LeftArrowIcon from "../icons/LeftArrowIcon.vue";
 import PencilIcon from "../icons/PencilIcon.vue";
+import RefreshIcon from "../icons/RefreshIcon.vue";
 import ManageWebhook from "./ManageWebhook.vue";
+import { snakeToSentenceCase } from "./case-utils";
 
-defineEmits(["clearToken"]);
+const emit = defineEmits(["clearToken", "reload"]);
 const props = defineProps<{ botInfo: UserFromGetMe | undefined; token: string }>();
 const { token, botInfo } = toRefs(props);
 const { useApiMethod } = useTelegramApi(token);
 const { refresh: getWebhookInfo, data: webhookInfo, error: error, state: state } = useApiMethod("getWebhookInfo");
-const currentAction = ref<"editing" | "visualizing">("visualizing");
+const currentAction = ref<"editing" | "visualizing">("editing");
 
 const info = computed(() => ({
   ...(botInfo.value ? botInfo.value : {}),
@@ -34,9 +36,6 @@ const USERINFO_DISPLAYED_PROPERTIES: Array<BooleansFromGetMe | BooleansFromWebho
   "supports_inline_queries",
   "has_custom_certificate",
 ];
-
-const snakeToSentenceCase = (words: string) =>
-  `${words.charAt(0).toUpperCase()}${words.split("").slice(1).join("")}`.replace(/_/g, " ");
 
 /** Webhook fields */
 const url = ref(webhookInfo.value?.url ?? "");
@@ -58,9 +57,10 @@ const formatDate = (value?: number) =>
       })
     : null;
 
-const refresh = (info: WebhookInfo) => {
+const reload = (reloadBotInfo: boolean = false) => {
   currentAction.value = 'visualizing'
-  webhookInfo.value = info
+  getWebhookInfo()
+  if (reloadBotInfo) emit('reload')
 }
 
 onMounted(() => {
@@ -118,14 +118,18 @@ onMounted(() => {
         </div>
         <manage-webhook
           @cancel="currentAction = 'visualizing'"
-          @refresh="refresh"
+          @refresh="reload"
           :url="webhookInfo.url"
+          :allowed-updates="webhookInfo.allowed_updates"
           v-if="currentAction === 'editing'"
         />
       </div>
-      <div class="mt-5">
+      <div class="mt-5 flex justify-between">
         <grammy-button size="small" @click="() => $emit('clearToken')">
           <left-arrow-icon class="inline h-4 w-4" /> change token
+        </grammy-button>
+        <grammy-button size="small" @click="reload(true)">
+          <refresh-icon class="inline h-4 w-4" /> reload bot info
         </grammy-button>
       </div>
     </div>
