@@ -6,17 +6,22 @@ import GrammyTextInput from "../GrammyTextInput.vue";
 import CancelIcon from "../icons/CancelIcon.vue";
 import CheckIcon from "../icons/CheckIcon.vue";
 import TrashIcon from "../icons/TrashIcon.vue";
-import { useApiMethod } from "./shared-storage";
-import type { WebhookInfo } from "grammy/types";
+import AllowedUpdates from "./AllowedUpdates.vue";
+import { useApiMethod } from "./store";
+import { type UpdateTypes, DEFAULT_UPDATE_TYPES } from "./update-types";
 
 const emit = defineEmits<{
   (event: "cancel"): void;
-  (event: "refresh", data: WebhookInfo): void;
+  (event: "refresh"): void;
 }>();
 
-const props = withDefaults(defineProps<{ url: string }>(), { url: "" });
+const props = withDefaults(defineProps<{ url: string; allowedUpdates: readonly UpdateTypes[] }>(), {
+  url: "",
+  allowedUpdates: () => DEFAULT_UPDATE_TYPES,
+});
 const newUrl = ref(props.url);
 const secret = ref("");
+const newAllowedUpdates = ref(props.allowedUpdates);
 const dropPendingUpdates = ref(false);
 
 const isValidUrl = computed(() => {
@@ -41,26 +46,17 @@ const {
   error: deleteWebhookError,
   state: deleteWebhookState,
 } = useApiMethod("deleteWebhook");
-const { refresh: getWebhookInfo, data: webhookInfo } = useApiMethod("getWebhookInfo");
 
-const withRefresh = (fn: () => Promise<any>, state: typeof setWebhookState) => () => {
-  fn()
-    .then(async () => {
-      if (state.value === "success") await getWebhookInfo();
-    })
-    .then(() => {
-      if (webhookInfo.value) emit("refresh", webhookInfo.value);
-    });
-};
+const withRefresh = (fn: () => Promise<any>) => () => fn().then(() => emit("refresh"));
 
 const setWebhook = withRefresh(() => {
   return setWebhookRaw(newUrl.value, {
     drop_pending_updates: dropPendingUpdates.value,
     secret_token: secret.value,
   });
-}, setWebhookState);
+});
 
-const deleteWebhook = withRefresh(deleteWebhookRaw, deleteWebhookState);
+const deleteWebhook = withRefresh(deleteWebhookRaw);
 </script>
 <template>
   <div class="w2-full mb-2 rounded bg-red-500 p-2" v-if="setWebhookState === 'error' || deleteWebhookState === 'error'">
@@ -70,14 +66,18 @@ const deleteWebhook = withRefresh(deleteWebhookRaw, deleteWebhookState);
     <label for="url" class="mr-2">Webhook URL</label>
     <grammy-text-input class="mt-2" v-model="newUrl" type="text" id="url" />
   </div>
-  <div class="flex flex-col">
+  <div class="mb-5 flex flex-col">
     <label for="secret" class="mr-2">Webhook secret</label>
     <grammy-text-input class="mt-2" id="secret" type="password" v-model="secret" />
   </div>
+  <div class="flex flex-col">
+    <label for="allowedUpdates" class="mr-2">Allowed Updates</label>
+    <allowed-updates class="mt-2" id="allowedUpdates" v-model="newAllowedUpdates" />
+  </div>
   <div class="flex flex-row justify-around">
-    <grammy-switch v-model="dropPendingUpdates" class="mt-5" id="drop_pending_updates"
-      >Drop pending updates</grammy-switch
-    >
+    <grammy-switch v-model="dropPendingUpdates" class="mt-5" id="drop_pending_updates">
+      Drop pending updates
+    </grammy-switch>
   </div>
   <div class="mt-5 flex flex-row justify-between">
     <grammy-button @click="() => $emit('cancel')">
