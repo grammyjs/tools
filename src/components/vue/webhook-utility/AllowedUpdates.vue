@@ -40,8 +40,8 @@ const allowDefault = () => emit('update:modelValue', DEFAULT_UPDATE_TYPES as any
     </div>
     <div class="mt-3 flex justify-center">
       <grammy-button size="small" @click="allowAll"> select all </grammy-button>
-      <grammy-button size="small" class="ms-2" @click="allowNone"> select none </grammy-button>
       <grammy-button size="small" class="ms-2" @click="allowDefault" > select default </grammy-button>
+      <grammy-button size="small" class="ms-2" @click="allowNone"> select none </grammy-button>
     </div>
   </div>
 </template>

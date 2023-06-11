@@ -66,7 +66,7 @@ const deleteWebhook = withRefresh(deleteWebhookRaw);
     <grammy-text-input class="mt-2" v-model="newUrl" type="text" id="url" />
   </div>
   <div class="mb-5 flex flex-col">
-    <label for="secret" class="mr-2">Webhook secret</label>
+    <label for="secret" class="mr-2">Webhook secret <span class="text-xs">(optional)</span></label>
     <grammy-text-input class="mt-2" id="secret" type="password" v-model="secret" />
   </div>
   <div class="flex flex-col">

@@ -3,6 +3,8 @@ import { useTelegramApi } from "grammy-vue";
 import type { UserFromGetMe, WebhookInfo } from "grammy/types";
 import { computed, onMounted, ref, toRefs, watch } from "vue";
 import ErrorMessage from "../ErrorMessage.vue";
+import CheckIcon from "../icons/CheckIcon.vue";
+import CancelIcon from "../icons/CancelIcon.vue";
 import GrammyButton from "../GrammyButton.vue";
 import GrammyInfo from "../GrammyInfo.vue";
 import ExternalIcon from "../icons/ExternalIcon.vue";
@@ -90,18 +92,13 @@ onMounted(() => {
       <grammy-info title="last sync error date" :value="formatDate(info.last_synchronization_error_date)" />
     </div>
     <hr />
-    <div class="boolean-properties my-3 grid grid-cols-3 gap-x-5 py-3">
-      <div v-for="property of USERINFO_DISPLAYED_PROPERTIES">
-        <input
-          type="checkbox"
-          :checked="info[property]"
-          readonly
-          @click.prevent
-          value="added_to_attachment_menu ? false}"
-          id="added_to_attachment_menu"
-          class="checked:accent-grammy-600"
-        />
-        <label for="added_to_attachment_menu" class="ms-2">{{ snakeToSentenceCase(property) }}</label>
+    <div class="flex justify-center">
+      <div class="boolean-properties my-3 grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-2 gap-x-5 py-3">
+        <div v-for="property of USERINFO_DISPLAYED_PROPERTIES">
+          <check-icon class="stroke-green-500 w-5 h-5 inline" v-if="info[property]" />
+          <cancel-icon class="stroke-red-500 w-5 h-5 inline" v-if="!info[property]" />
+          <label for="added_to_attachment_menu" class="ms-2">{{ snakeToSentenceCase(property) }}</label>
+        </div>
       </div>
     </div>
     <hr />
