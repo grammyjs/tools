@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import GrammyButton from "../GrammyButton.vue";
-import { UpdateTypes, ALL_UPDATE_TYPES } from "./update-types";
+import { UpdateTypes, ALL_UPDATE_TYPES, DEFAULT_UPDATE_TYPES } from "./update-types";
 import { snakeToTitleCase } from "./case-utils";
 import { computed } from "vue";
 
@@ -23,6 +23,7 @@ const set = (updateType: string, value: boolean) => {
 
 const allowAll = () => emit("update:modelValue", ALL_UPDATE_TYPES as any);
 const allowNone = () => emit("update:modelValue", []);
+const allowDefault = () => emit('update:modelValue', DEFAULT_UPDATE_TYPES as any)
 </script>
 <template>
   <div class="rounded bg-translucentbackground p-5">
@@ -40,6 +41,7 @@ const allowNone = () => emit("update:modelValue", []);
     <div class="mt-3 flex justify-center">
       <grammy-button size="small" @click="allowAll"> select all </grammy-button>
       <grammy-button size="small" class="ms-2" @click="allowNone"> select none </grammy-button>
+      <grammy-button size="small" class="ms-2" @click="allowDefault" > select default </grammy-button>
     </div>
   </div>
 </template>
