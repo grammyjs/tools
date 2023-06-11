@@ -1,13 +1,10 @@
 import { Fragment } from "react";
-import FILTER_QUERIES from "./mod.ts";
 import { L1_SHORTCUTS, L2_SHORTCUTS, UPDATE_KEYS } from "./filter.ts";
+import FILTER_QUERIES from "./mod.ts";
 
-const CONTEXT_SHORTCUTS: Record<string, string> = UPDATE_KEYS.reduce(
-  (prev, current) => {
-    return { ...prev, [current]: camelCase(current, "_") };
-  },
-  {},
-);
+const CONTEXT_SHORTCUTS: Record<string, string> = UPDATE_KEYS.reduce((prev, current) => {
+  return { ...prev, [current]: camelCase(current, "_") };
+}, {});
 
 function camelCase(str: string, separator: string) {
   return (
@@ -23,10 +20,9 @@ function camelCase(str: string, separator: string) {
 const PREFIX_DOCS = {
   chat_member: (
     <b>
-      You need to specify this update in <code>allowed_updates</code>{" "}
-      to receive them.
+      You need to specify this update in <code>allowed_updates</code> to receive them.
     </b>
-  ), 
+  ),
 };
 
 export function generate() {
@@ -69,10 +65,8 @@ export function generate() {
         <div>
           <p>Query for filtering {L1T} update.</p>
           <p>Here is how you can access the information about the update:</p>
-          <pre className="w-full p-3 b-rounded mt-3 bg-gray-200 @dark:bg-gray-800">
-            <code>
-              {L1.map((k1) => `ctx.${CONTEXT_SHORTCUTS[k1]};`).join("\n")}
-            </code>
+          <pre className="b-rounded @dark:bg-gray-800 mt-3 w-full bg-gray-200 p-3">
+            <code>{L1.map((k1) => `ctx.${CONTEXT_SHORTCUTS[k1]};`).join("\n")}</code>
           </pre>
         </div>
       );
@@ -83,27 +77,25 @@ export function generate() {
             Query for filtering {L1T} update with the field {L2T}.
           </p>
           <p>Here is how you can access the properties of the field:</p>
-          <pre className="w-full p-3 b-rounded mt-3 bg-gray-200 @dark:bg-gray-800">
-            <code>
-              {L1.map((k1) =>
-                L2.map((k2) => `ctx.${CONTEXT_SHORTCUTS[k1]}.${k2};`).join("\n")
-              ).join("\n")}
-            </code>
+          <pre className="b-rounded @dark:bg-gray-800 mt-3 w-full bg-gray-200 p-3">
+            <code>{L1.map((k1) => L2.map((k2) => `ctx.${CONTEXT_SHORTCUTS[k1]}.${k2};`).join("\n")).join("\n")}</code>
           </pre>
         </div>
       );
     } else if (L1[0] && L2[0] && L3) {
       const isEntity = L2.includes("entities");
-      const info0 = isEntity
-        ? <span>containing at least one entity of the type {L3T}</span>
-        : <span>with {L3T} property</span>;
+      const info0 = isEntity ? (
+        <span>containing at least one entity of the type {L3T}</span>
+      ) : (
+        <span>with {L3T} property</span>
+      );
       const accessInfo = L2.join().includes("entities")
         ? `ctx.entities("${L3}");`
         : L1.map((k1) =>
-          L2.map((k2) => {
-            return `ctx.${CONTEXT_SHORTCUTS[k1]}.${k2}.${L3};`;
-          }).join("\n")
-        ).join("\n");
+            L2.map((k2) => {
+              return `ctx.${CONTEXT_SHORTCUTS[k1]}.${k2}.${L3};`;
+            }).join("\n")
+          ).join("\n");
 
       doc = (
         <div>
@@ -111,12 +103,10 @@ export function generate() {
             Query for filtering {L1T} update with the field {L2T} {info0}.
           </p>
           <p>
-            Here is how you can access the {isEntity
-              ? <span>entities of {L3T} type</span>
-              : <span>{L3T} property</span>}
-            :
+            Here is how you can access the{" "}
+            {isEntity ? <span>entities of {L3T} type</span> : <span>{L3T} property</span>}:
           </p>
-          <pre className="w-full p-3 b-rounded mt-3 bg-gray-200 @dark:bg-gray-800">
+          <pre className="b-rounded @dark:bg-gray-800 mt-3 w-full bg-gray-200 p-3">
             <code>{accessInfo}</code>
           </pre>
         </div>
@@ -127,16 +117,14 @@ export function generate() {
 
     queryDocs.push({
       query,
-      doc: prefix
-        ? (
-          <div>
-            <p>{prefix}</p>
-            {doc}
-          </div>
-        )
-        : (
-          doc
-        ),
+      doc: prefix ? (
+        <div>
+          <p>{prefix}</p>
+          {doc}
+        </div>
+      ) : (
+        doc
+      ),
     });
   }
 

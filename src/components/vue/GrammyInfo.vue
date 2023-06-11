@@ -9,7 +9,7 @@ defineProps<{ title?: string; value?: string | number | undefined | null }>();
       </span>
     </slot>
     <slot name="title">
-      <span class="text-sm font-light">{{ title ?? '' }}</span>
+      <span class="text-sm font-light">{{ title ?? "" }}</span>
     </slot>
   </div>
 </template>
