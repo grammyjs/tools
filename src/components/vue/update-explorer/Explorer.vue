@@ -43,11 +43,11 @@ const clearUpdates = () => {
 // Listening
 const token = ref("");
 watch(token, (value) => {
-  localStorage.setItem("token", value);
+  localStorage.setItem("token", JSON.stringify(value));
 });
 const hasToken = computed(() => Boolean(token.value));
 onMounted(() => {
-  token.value = localStorage.getItem("token") ?? "";
+  token.value = JSON.parse(localStorage.getItem("token") ?? "");
 });
 
 const toggleListening = () => {
