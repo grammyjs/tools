@@ -7,7 +7,6 @@ import GrammyButton from "../GrammyButton.vue";
 import GrammyInfo from "../GrammyInfo.vue";
 import ExternalIcon from "../icons/ExternalIcon.vue";
 import LeftArrowIcon from "../icons/LeftArrowIcon.vue";
-import PencilIcon from "../icons/PencilIcon.vue";
 import RefreshIcon from "../icons/RefreshIcon.vue";
 import ManageWebhook from "./ManageWebhook.vue";
 import { snakeToSentenceCase } from "./case-utils";
@@ -17,7 +16,6 @@ const props = defineProps<{ botInfo: UserFromGetMe | undefined; token: string }>
 const { token, botInfo } = toRefs(props);
 const { useApiMethod } = useTelegramApi(token);
 const { refresh: getWebhookInfo, data: webhookInfo, error: error, state: state } = useApiMethod("getWebhookInfo");
-const currentAction = ref<"editing" | "visualizing">("editing");
 
 const info = computed(() => ({
   ...(botInfo.value ? botInfo.value : {}),
@@ -58,7 +56,6 @@ const formatDate = (value?: number) =>
     : null;
 
 const reload = (reloadBotInfo: boolean = false) => {
-  currentAction.value = "visualizing";
   getWebhookInfo();
   if (reloadBotInfo) emit("reload");
 };
@@ -110,18 +107,10 @@ onMounted(() => {
     <hr />
     <div class="webhook-fields mt-5">
       <div class="rounded border p-5">
-        <div class="flex flex-col items-center" v-show="currentAction === 'visualizing'">
-          <grammy-info title="webhook url" :value="webhookInfo.url || 'no webhook set'" />
-          <grammy-button variant="primary" size="small" class="mt-4" @click="currentAction = 'editing'">
-            <pencil-icon class="inline h-4 w-4 align-text-top" /> edit
-          </grammy-button>
-        </div>
         <manage-webhook
-          @cancel="currentAction = 'visualizing'"
           @refresh="reload"
           :url="webhookInfo.url"
           :allowed-updates="webhookInfo.allowed_updates"
-          v-if="currentAction === 'editing'"
         />
       </div>
       <div class="mt-5 flex justify-between">

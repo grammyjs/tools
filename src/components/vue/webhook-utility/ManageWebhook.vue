@@ -3,7 +3,6 @@ import { computed, ref } from "vue";
 import GrammyButton from "../GrammyButton.vue";
 import GrammySwitch from "../GrammySwitch.vue";
 import GrammyTextInput from "../GrammyTextInput.vue";
-import CancelIcon from "../icons/CancelIcon.vue";
 import CheckIcon from "../icons/CheckIcon.vue";
 import TrashIcon from "../icons/TrashIcon.vue";
 import AllowedUpdates from "./AllowedUpdates.vue";
@@ -11,7 +10,6 @@ import { useApiMethod } from "./store";
 import { type UpdateTypes, DEFAULT_UPDATE_TYPES } from "./update-types";
 
 const emit = defineEmits<{
-  (event: "cancel"): void;
   (event: "refresh"): void;
 }>();
 
@@ -81,9 +79,6 @@ const deleteWebhook = withRefresh(deleteWebhookRaw);
     </grammy-switch>
   </div>
   <div class="mt-5 flex flex-row justify-between">
-    <grammy-button @click="() => $emit('cancel')">
-      <cancel-icon class="inline h-5 w-5 align-text-bottom" /> cancel
-    </grammy-button>
     <div>
       <grammy-button variant="danger" class="mr-2" :loading="deleteWebhookState === 'loading'" @click="deleteWebhook">
         <trash-icon class="inline h-5 w-5 align-text-bottom" /> delete webhook
