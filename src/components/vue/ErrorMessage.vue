@@ -1,5 +1,5 @@
 <template>
-  <p class="p-2 bg-red-500 rounded">
+  <p class="rounded bg-red-500 p-2">
     <slot />
   </p>
 </template>

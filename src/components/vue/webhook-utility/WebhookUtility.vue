@@ -4,7 +4,7 @@ import ErrorMessage from "../ErrorMessage.vue";
 import GrammyButton from "../GrammyButton.vue";
 import GrammyTextInput from "../GrammyTextInput.vue";
 import WebhookInfo from "./WebhookInfo.vue";
-import { token, useApiMethod } from './shared-storage'
+import { token, useApiMethod } from "./store";
 
 const { refresh: getMe, state, data: botInfo } = useApiMethod("getMe");
 const disableLoadBotInfo = computed(() => !token.value || state.value === "loading");
@@ -47,7 +47,7 @@ const clearToken = () => {
         </form>
       </div>
       <div v-if="state === 'success'">
-        <webhook-info @clear-token="() => clearToken()" :bot-info="botInfo" :token="token" />
+        <webhook-info @clear-token="() => clearToken()" @reload="getMe" :bot-info="botInfo" :token="token" />
       </div>
     </div>
   </div>

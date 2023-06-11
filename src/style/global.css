@@ -105,7 +105,8 @@ h6 {
   font-family: "Red Hat Display", "Noto Sans Display", system-ui, sans-serif;
 }
 
-pre, code {
+pre,
+code {
   font-family: "Source Code Pro", Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono,
     Bitstream Vera Sans Mono, Courier New, monospace;
 }

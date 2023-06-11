@@ -3,19 +3,21 @@ import { useTelegramApi } from "grammy-vue";
 import type { UserFromGetMe, WebhookInfo } from "grammy/types";
 import { computed, onMounted, ref, toRefs, watch } from "vue";
 import ErrorMessage from "../ErrorMessage.vue";
+import CheckIcon from "../icons/CheckIcon.vue";
+import CancelIcon from "../icons/CancelIcon.vue";
 import GrammyButton from "../GrammyButton.vue";
 import GrammyInfo from "../GrammyInfo.vue";
 import ExternalIcon from "../icons/ExternalIcon.vue";
 import LeftArrowIcon from "../icons/LeftArrowIcon.vue";
-import PencilIcon from "../icons/PencilIcon.vue";
+import RefreshIcon from "../icons/RefreshIcon.vue";
 import ManageWebhook from "./ManageWebhook.vue";
+import { snakeToSentenceCase } from "./case-utils";
 
-defineEmits(["clearToken"]);
+const emit = defineEmits(["clearToken", "reload"]);
 const props = defineProps<{ botInfo: UserFromGetMe | undefined; token: string }>();
 const { token, botInfo } = toRefs(props);
 const { useApiMethod } = useTelegramApi(token);
 const { refresh: getWebhookInfo, data: webhookInfo, error: error, state: state } = useApiMethod("getWebhookInfo");
-const currentAction = ref<"editing" | "visualizing">("visualizing");
 
 const info = computed(() => ({
   ...(botInfo.value ? botInfo.value : {}),
@@ -34,9 +36,6 @@ const USERINFO_DISPLAYED_PROPERTIES: Array<BooleansFromGetMe | BooleansFromWebho
   "supports_inline_queries",
   "has_custom_certificate",
 ];
-
-const snakeToSentenceCase = (words: string) =>
-  `${words.charAt(0).toUpperCase()}${words.split("").slice(1).join("")}`.replace(/_/g, " ");
 
 /** Webhook fields */
 const url = ref(webhookInfo.value?.url ?? "");
@@ -58,10 +57,10 @@ const formatDate = (value?: number) =>
       })
     : null;
 
-const refresh = (info: WebhookInfo) => {
-  currentAction.value = 'visualizing'
-  webhookInfo.value = info
-}
+const reload = (reloadBotInfo: boolean = false) => {
+  getWebhookInfo();
+  if (reloadBotInfo) emit("reload");
+};
 
 onMounted(() => {
   getWebhookInfo();
@@ -93,39 +92,30 @@ onMounted(() => {
       <grammy-info title="last sync error date" :value="formatDate(info.last_synchronization_error_date)" />
     </div>
     <hr />
-    <div class="boolean-properties my-3 grid grid-cols-3 gap-x-5 py-3">
-      <div v-for="property of USERINFO_DISPLAYED_PROPERTIES">
-        <input
-          type="checkbox"
-          :checked="info[property]"
-          readonly
-          @click.prevent
-          value="added_to_attachment_menu ? false}"
-          id="added_to_attachment_menu"
-          class="checked:accent-grammy-600"
-        />
-        <label for="added_to_attachment_menu" class="ms-2">{{ snakeToSentenceCase(property) }}</label>
+    <div class="flex justify-center">
+      <div class="boolean-properties my-3 grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-2 gap-x-5 py-3">
+        <div v-for="property of USERINFO_DISPLAYED_PROPERTIES">
+          <check-icon class="stroke-green-500 w-5 h-5 inline" v-if="info[property]" />
+          <cancel-icon class="stroke-red-500 w-5 h-5 inline" v-if="!info[property]" />
+          <label for="added_to_attachment_menu" class="ms-2">{{ snakeToSentenceCase(property) }}</label>
+        </div>
       </div>
     </div>
     <hr />
     <div class="webhook-fields mt-5">
       <div class="rounded border p-5">
-        <div class="flex flex-col items-center" v-show="currentAction === 'visualizing'">
-          <grammy-info title="webhook url" :value="webhookInfo.url || 'no webhook set'" />
-          <grammy-button variant="primary" size="small" class="mt-4" @click="currentAction = 'editing'">
-            <pencil-icon class="inline h-4 w-4 align-text-top" /> edit
-          </grammy-button>
-        </div>
         <manage-webhook
-          @cancel="currentAction = 'visualizing'"
-          @refresh="refresh"
+          @refresh="reload"
           :url="webhookInfo.url"
-          v-if="currentAction === 'editing'"
+          :allowed-updates="webhookInfo.allowed_updates"
         />
       </div>
-      <div class="mt-5">
+      <div class="mt-5 flex justify-between">
         <grammy-button size="small" @click="() => $emit('clearToken')">
           <left-arrow-icon class="inline h-4 w-4" /> change token
+        </grammy-button>
+        <grammy-button size="small" @click="reload(true)">
+          <refresh-icon class="inline h-4 w-4" /> reload bot info
         </grammy-button>
       </div>
     </div>
