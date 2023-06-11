@@ -78,15 +78,13 @@ const deleteWebhook = withRefresh(deleteWebhookRaw);
       Drop pending updates
     </grammy-switch>
   </div>
-  <div class="mt-5 flex flex-row justify-between">
-    <div>
-      <grammy-button variant="danger" class="mr-2" :loading="deleteWebhookState === 'loading'" @click="deleteWebhook">
-        <trash-icon class="inline h-5 w-5 align-text-bottom" /> delete webhook
-      </grammy-button>
-      <grammy-button variant="success" :disabled="!canSet" :loading="setWebhookState === 'loading'" @click="setWebhook">
-        <check-icon class="inline h-5 w-5 align-text-bottom" />
-        set webhook
-      </grammy-button>
-    </div>
+  <div class="mt-5 flex flex-row justify-end">
+    <grammy-button variant="danger" class="mr-2" :loading="deleteWebhookState === 'loading'" @click="deleteWebhook">
+      <trash-icon class="inline h-5 w-5 align-text-bottom" /> delete webhook
+    </grammy-button>
+    <grammy-button variant="success" :disabled="!canSet" :loading="setWebhookState === 'loading'" @click="setWebhook">
+      <check-icon class="inline h-5 w-5 align-text-bottom" />
+      set webhook
+    </grammy-button>
   </div>
 </template>
