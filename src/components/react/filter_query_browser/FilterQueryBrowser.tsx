@@ -12,24 +12,22 @@ const list = (q: string) =>
     .filter(({ query }) => query.includes(q.toLowerCase()))
     .map(({ query, doc }) => {
       return (
-        <details key={query} className="py-1 my-2">
-          <summary className="mb-2 select-none cursor-pointer">
+        <details key={query} className="my-2 py-1">
+          <summary className="mb-2 cursor-pointer select-none">
             <a href={`#${slug(query)}`}></a>
-            <h3 className="font-mono inline-block" id={`${slug(query)}`}>
-              {q == ""
-                ? (
-                  query
-                )
-                : (
-                  <>
-                    {query.slice(0, query.indexOf(q))}
-                    <span className="text-grammy">{q}</span>
-                    {query.slice(query.indexOf(q) + q.length)}
-                  </>
-                )}
+            <h3 className="inline-block font-mono" id={`${slug(query)}`}>
+              {q == "" ? (
+                query
+              ) : (
+                <>
+                  {query.slice(0, query.indexOf(q))}
+                  <span className="text-grammy">{q}</span>
+                  {query.slice(query.indexOf(q) + q.length)}
+                </>
+              )}
             </h3>
           </summary>
-          <div className="b-l mx-2 p-4 my-2">{doc}</div>
+          <div className="b-l mx-2 my-2 p-4">{doc}</div>
         </details>
       );
     });
@@ -53,7 +51,7 @@ export default function FilterQueryBrowser() {
         value={q}
         onChange={(e) => setQ(e.target.value)}
         placeholder={`Search among ${filterQueries.length} filter queries...`}
-        className="p-3 w-full bg-altbackground focus:outline-none placeholder:opacity-80 dark:placeholder:opacity-50"
+        className="w-full bg-altbackground p-3 placeholder:opacity-80 focus:outline-none dark:placeholder:opacity-50"
       />
       <div className="py-4">{list(q)}</div>
     </Main>

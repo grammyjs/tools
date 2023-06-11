@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { withDefaults } from 'vue';
+import { withDefaults } from "vue";
 
-withDefaults(defineProps<{ modelValue: boolean, id: string }>(), { 'modelValue': false })
-defineEmits(['update:modelValue'])
+withDefaults(defineProps<{ modelValue: boolean; id: string }>(), { modelValue: false });
+defineEmits(["update:modelValue"]);
 </script>
 <template>
   <div>

@@ -17,21 +17,12 @@ export const UPDATE_KEYS = [
 
 export const L1_SHORTCUTS = {
   "": ["message", "channel_post"],
-  "msg": ["message", "channel_post"],
-  "edit": ["edited_message", "edited_channel_post"],
+  msg: ["message", "channel_post"],
+  edit: ["edited_message", "edited_channel_post"],
 };
 
 export const L2_SHORTCUTS = {
   "": ["entities", "caption_entities"],
-  "media": ["photo", "video"],
-  "file": [
-    "photo",
-    "animation",
-    "audio",
-    "document",
-    "video",
-    "video_note",
-    "voice",
-    "sticker",
-  ],
+  media: ["photo", "video"],
+  file: ["photo", "animation", "audio", "document", "video", "video_note", "voice", "sticker"],
 };
