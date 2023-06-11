@@ -58,10 +58,10 @@ const formatDate = (value?: number) =>
     : null;
 
 const reload = (reloadBotInfo: boolean = false) => {
-  currentAction.value = 'visualizing'
-  getWebhookInfo()
-  if (reloadBotInfo) emit('reload')
-}
+  currentAction.value = "visualizing";
+  getWebhookInfo();
+  if (reloadBotInfo) emit("reload");
+};
 
 onMounted(() => {
   getWebhookInfo();
