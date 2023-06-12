@@ -4,6 +4,7 @@ import ErrorMessage from "../ErrorMessage.vue";
 import GrammyButton from "../GrammyButton.vue";
 import GrammyTextInput from "../GrammyTextInput.vue";
 import WebhookInfo from "./WebhookInfo.vue";
+import TokenDisclaimer from "../TokenDisclaimer.vue";
 import { token, useApiMethod } from "./store";
 
 const { refresh: getMe, state, data: botInfo } = useApiMethod("getMe");
@@ -32,6 +33,7 @@ const clearToken = () => {
             class="mt-2 w-full"
             :disabled="state === 'loading'"
           />
+          <token-disclaimer class="mt-3" />
           <div class="flex flex-row justify-end">
             <grammy-button
               :disabled="disableLoadBotInfo"
