@@ -7,7 +7,8 @@
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "fmt": "prettier -w src"
   },
   "dependencies": {
     "@astrojs/react": "^2.1.0",
