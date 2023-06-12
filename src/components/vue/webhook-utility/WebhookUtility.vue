@@ -33,11 +33,11 @@ const clearToken = () => {
             class="mt-2 w-full"
             :disabled="state === 'loading'"
           />
-          <token-disclaimer class="mt-3" />
+          <token-disclaimer class="mt-4" />
           <div class="flex flex-row justify-end">
             <grammy-button
               :disabled="disableLoadBotInfo"
-              class="mt-6"
+              class="mt-3"
               type="submit"
               @click.prevent="getMe"
               :loading="state === 'loading'"

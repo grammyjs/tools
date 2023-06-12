@@ -6,6 +6,7 @@ import StartIcon from "../icons/StartIcon.vue";
 import StopIcon from "../icons/StopIcon.vue";
 import TrashIcon from "../icons/TrashIcon.vue";
 import Empty from "./Empty.vue";
+import TokenDisclaimer from "../TokenDisclaimer.vue";
 import { isBusy, state, stateIs } from "./state";
 
 type DecoratedUpdate = Update & {
@@ -188,6 +189,7 @@ onMounted(async () => {
           class="mb-4 w-full overflow-auto bg-altbackground p-3 placeholder:opacity-80 focus:outline-none disabled:text-gray-500 dark:placeholder:opacity-50"
         />
       </div>
+      <token-disclaimer class="mb-4" />
     </section>
     <section class="flex flex-1 border-t">
       <div class="w-52">
