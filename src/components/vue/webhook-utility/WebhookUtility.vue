@@ -33,7 +33,10 @@ const clearToken = () => {
             class="mt-2 w-full"
             :disabled="state === 'loading'"
           />
-          <token-disclaimer class="mt-4" />
+          <token-disclaimer
+            source-url="https://github.com/grammyjs/tools/blob/main/src/components/vue/composables/persistentRef.ts"
+            class="mt-4"
+          />
           <div class="flex flex-row justify-end">
             <grammy-button
               :disabled="disableLoadBotInfo"
