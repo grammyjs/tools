@@ -1,4 +1,4 @@
-# Contributing to grammY Tools
+# Contributing to grammY tools
 
 First of all, thanks for your interest in helping out!
 We appreciate any kind of support, be it small bug fixes, large feature contributions, or even just if you drop us a message with some constructive criticism on how grammY tools can be improved for your use case.
@@ -16,11 +16,11 @@ If you’re unsure whether your changes are welcome, open an issue on GitHub or 
 In case you’d like to get some inspiration what we're working on, check out the [issues list](https://github.com/grammyjs/tools/issues).
 They are labeled according to the type of issue, the tool they relate to, and how good of a first issue they are.
 
-## A Few Words on Astro, Vue, React and Other Frameworks
+## A Few Words on Astro, Vue, React.js and Other Frameworks
 
 **TL;DR** we use Astro because it supports multiple frameworks, and that makes it easier for anyone to contribute, since they can use whatever they're familiar with
 
-grammY Tools started as a single React website, which featured the Filter Query Browser.
+grammY tools started as a React.js website, which featured the Filter Query Browser.
 After a while, some people built up an interest to participate on its development, which led to a [discussion](https://t.me/grammyjs/118131) about how we should proceed with it, what frameworks we should use, and what was the future of the website.
 
 After debating on different approaches and technologies, we decided it was best if we could use multiple UI frameworks, since that's what allow the biggest amount of people to contribute.
@@ -39,7 +39,7 @@ But also, it's fast, has the amazing concept of Isles, supports SSR by default a
 
 ### Coding
 
-If you want to read or modify grammY Tools' code, you can do the following.
+If you want to read or modify grammY tools' code, you can do the following.
 
 1. Install Node from <https://nodejs.org/>
 2. Install pnpm with `npm i -g pnpm`
@@ -52,6 +52,6 @@ If you want to read or modify grammY Tools' code, you can do the following.
 5. Run `pnpm i` in the root directory of the repo.
    This will download all dependencies and make your setup ready for development.
 
-You are now ready to work on grammY Tools.
+You are now ready to work on grammY tools.
 To see your changes in real time, run `pnpm dev` and open the indicated URL on your browser.
 Before you open a PR, make sure to run `pnpm fmt` on the root directory to format your code with prettier.
