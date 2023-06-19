@@ -93,17 +93,22 @@ onMounted(() => {
       </div>
     </div>
     <hr />
-    <div class="webhook-stats my-5 grid grid-cols-3">
+    <div class="webhook-stats my-5 grid grid-cols-2">
       <grammy-info
         :title="`pending update${(info.pending_update_count ?? 0) !== 1 ? 's' : ''}`"
         :value="info.pending_update_count"
       />
-      <grammy-info title="last error date" :value="formatDate(info.last_error_date)" />
       <grammy-info title="last sync error date" :value="formatDate(info.last_synchronization_error_date)" />
     </div>
     <hr />
     <div class="last-error-messages my-5 flex justify-center">
-      <grammy-info title="last error message" :value="webhookInfo.last_error_message" />
+      <grammy-info title="last webhook error">
+        <template #value>
+          <div class="font-bold flex flex-col">
+            <span>{{ webhookInfo.last_error_message }}</span> <span>{{ formatDate(info.last_error_date) }}</span>
+          </div>
+        </template>
+      </grammy-info>
     </div>
     <hr />
     <div class="webhook-fields mt-5">
