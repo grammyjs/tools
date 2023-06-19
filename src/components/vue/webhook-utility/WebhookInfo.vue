@@ -83,32 +83,39 @@ onMounted(() => {
       </a>
     </div>
     <hr />
-    <div class="webhook-stats my-5 grid grid-cols-3">
-      <grammy-info
-        :title="`pending update${(info.pending_update_count ?? 0) !== 1 ? 's' : ''}`"
-        :value="info.pending_update_count"
-      />
-      <grammy-info title="last error date" :value="formatDate(info.last_error_date)" />
-      <grammy-info title="last sync error date" :value="formatDate(info.last_synchronization_error_date)" />
-    </div>
-    <hr />
     <div class="flex justify-center">
-      <div class="boolean-properties my-3 grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-2 gap-x-5 py-3">
+      <div class="boolean-properties my-3 grid gap-x-5 py-3 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3">
         <div v-for="property of USERINFO_DISPLAYED_PROPERTIES">
-          <check-icon class="stroke-green-500 w-5 h-5 inline" v-if="info[property]" />
-          <cancel-icon class="stroke-red-500 w-5 h-5 inline" v-if="!info[property]" />
+          <check-icon class="inline h-5 w-5 stroke-green-500" v-if="info[property]" />
+          <cancel-icon class="inline h-5 w-5 stroke-red-500" v-if="!info[property]" />
           <label for="added_to_attachment_menu" class="ms-2">{{ snakeToSentenceCase(property) }}</label>
         </div>
       </div>
     </div>
     <hr />
+    <div class="webhook-stats my-5 grid grid-cols-2">
+      <grammy-info title="pending updates count" :value="info.pending_update_count">
+        <template #title>
+          <div class="text-sm font-light flex flex-col">
+            <span>pending update count</span>
+            <span v-if="info.last_synchronization_error_date">
+              last sync error at <span class="font-bold">{{ formatDate(info.last_synchronization_error_date) }}</span>
+            </span>
+          </div>
+        </template>
+      </grammy-info>
+      <grammy-info title="last webhook error">
+        <template #value>
+          <div class="font-bold flex flex-col">
+            <span>{{ webhookInfo.last_error_message }}</span> <span>{{ formatDate(info.last_error_date) }}</span>
+          </div>
+        </template>
+      </grammy-info>
+    </div>
+    <hr />
     <div class="webhook-fields mt-5">
       <div class="rounded border p-5">
-        <manage-webhook
-          @refresh="reload"
-          :url="webhookInfo.url"
-          :allowed-updates="webhookInfo.allowed_updates"
-        />
+        <manage-webhook @refresh="reload" :url="webhookInfo.url" :allowed-updates="webhookInfo.allowed_updates" />
       </div>
       <div class="mt-5 flex justify-between">
         <grammy-button size="small" @click="() => $emit('clearToken')">
