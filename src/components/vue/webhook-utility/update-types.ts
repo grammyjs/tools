@@ -1,20 +1,9 @@
-// TODO: Import from core once https://github.com/grammyjs/grammY/pull/422 is merged
-export const DEFAULT_UPDATE_TYPES = [
-  "message",
-  "edited_message",
-  "channel_post",
-  "edited_channel_post",
-  "inline_query",
-  "chosen_inline_result",
-  "callback_query",
-  "shipping_query",
-  "pre_checkout_query",
-  "poll",
-  "poll_answer",
-  "my_chat_member",
-  "chat_join_request",
-] as const;
+import { API_CONSTANTS } from "grammy/web";
 
-export const ALL_UPDATE_TYPES = [...DEFAULT_UPDATE_TYPES, "chat_member"] as const;
+type AllUpdateTypes = (typeof API_CONSTANTS)["ALL_UPDATE_TYPES"];
+type DefaultUpdateTypes = Array<Omit<AllUpdateTypes[number], "chat_member">>;
+
+export const ALL_UPDATE_TYPES = API_CONSTANTS.ALL_UPDATE_TYPES;
+export const DEFAULT_UPDATE_TYPES: DefaultUpdateTypes = ALL_UPDATE_TYPES.filter((t) => t !== "chat_member");
 
 export type UpdateTypes = (typeof ALL_UPDATE_TYPES)[number];

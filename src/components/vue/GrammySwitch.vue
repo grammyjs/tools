@@ -12,7 +12,7 @@ defineEmits(["update:modelValue"]);
       role="switch"
       :id="id"
       :checked="modelValue"
-      @input="$emit('update:modelValue', ($event.target as any).checked)"
+      @input="$emit('update:modelValue', ($event.target as HTMLInputElement).checked)"
     />
     <label class="inline-block pl-[0.15rem] opacity-50 hover:pointer-events-none" :for="id">
       <slot></slot>
