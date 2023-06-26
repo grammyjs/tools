@@ -23,7 +23,7 @@ const set = (updateType: string, value: boolean) => {
 
 const allowAll = () => emit("update:modelValue", ALL_UPDATE_TYPES as any);
 const allowNone = () => emit("update:modelValue", []);
-const allowDefault = () => emit('update:modelValue', DEFAULT_UPDATE_TYPES as any)
+const allowDefault = () => emit("update:modelValue", DEFAULT_UPDATE_TYPES as any);
 </script>
 <template>
   <div class="rounded bg-translucentbackground p-5">
@@ -33,14 +33,14 @@ const allowDefault = () => emit('update:modelValue', DEFAULT_UPDATE_TYPES as any
           type="checkbox"
           class="checked:accent-grammy-600"
           :checked="allowedUpdates[updateType]"
-          @click="set(updateType, $event.target.checked)"
+          @click="set(updateType, ($event.target as any).checked)"
         />
         {{ snakeToTitleCase(updateType) }}
       </div>
     </div>
     <div class="mt-3 flex justify-center">
       <grammy-button size="small" @click="allowAll"> select all </grammy-button>
-      <grammy-button size="small" class="ms-2" @click="allowDefault" > select default </grammy-button>
+      <grammy-button size="small" class="ms-2" @click="allowDefault"> select default </grammy-button>
       <grammy-button size="small" class="ms-2" @click="allowNone"> select none </grammy-button>
     </div>
   </div>

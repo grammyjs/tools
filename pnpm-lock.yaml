@@ -27,11 +27,11 @@ dependencies:
     specifier: ^2.6.1
     version: 2.6.1(@types/node@14.18.33)
   grammy:
-    specifier: ^1.15.1
-    version: 1.15.3
+    specifier: ^1.17.1
+    version: 1.17.1
   grammy-vue:
     specifier: ^0.0.4
-    version: 0.0.4(grammy@1.15.3)(vue@3.2.47)
+    version: 0.0.4(grammy@1.17.1)(vue@3.2.47)
   json-editor-vue:
     specifier: ^0.10.5
     version: 0.10.5(vanilla-jsoneditor@0.16.1)(vue@3.2.47)
@@ -2284,8 +2284,8 @@ packages:
     resolution: {integrity: sha512-k2Ty1JcVojjJFwrg/ThKi2ujJ7XNLYaFGNB/bWT9wGR+oSMJHMa5w+CUq6p/pVrKeNNgA7pCqEcjSnHVoqJQFw==}
     dev: true
 
-  /@grammyjs/types@3.0.3:
-    resolution: {integrity: sha512-ca/7GGJVFaqETN0IkXPRBY/bLV/PwmiP8AOU7Lg0VJIELDMqPvHLM8xENtx3iVCUoEa8/SkWfvHt5wb8Kzz+Dg==}
+  /@grammyjs/types@3.1.2:
+    resolution: {integrity: sha512-AsSkTUfZCfSEIacUBOQ94qLbZZy3UofkschWv4uBJKEHjuEfGnjeZZgiwhDfTDjmpmW+MbcasvS+FEfD2jiSLw==}
     dev: false
 
   /@jridgewell/gen-mapping@0.1.1:
@@ -4991,24 +4991,24 @@ packages:
   /graceful-fs@4.2.11:
     resolution: {integrity: sha512-RbJ5/jmFcNNCcDV5o9eTnBLJ/HszWV0P73bc+Ff4nS/rJj+YaS6IGyiOL0VoBYX+l1Wrl3k63h/KrH+nhJ0XvQ==}
 
-  /grammy-vue@0.0.4(grammy@1.15.3)(vue@3.2.47):
+  /grammy-vue@0.0.4(grammy@1.17.1)(vue@3.2.47):
     resolution: {integrity: sha512-PgSrAzFbZJxPx1569+6pfLjpaDj6ZXLAORdaR9c5y5dDuwK24GHZxYlFiifkBzMWUfOv1hgEfK6iPdhk3SAZjg==}
     peerDependencies:
       grammy: ^1.14.1
       vue: ^3.2.47
     dependencies:
-      grammy: 1.15.3
+      grammy: 1.17.1
       vue: 3.2.47
     dev: false
 
-  /grammy@1.15.3:
-    resolution: {integrity: sha512-uqkF4AMWiZTSwwzBeprRIEiOg3yXT7Ray37bpg2ew5jaX+cuIG5AUm30S2Vr8ezghjLZKgAg2tRi+r9f9uvMrg==}
+  /grammy@1.17.1:
+    resolution: {integrity: sha512-ba1xsEVMoEjvTZNhOvSYt/dgoIFbMKYnFKHw3iioKYbQMCBsoX+FbO5hRse+sxhNwQzkDmiUtzAcK5elpEJg2w==}
     engines: {node: ^12.20.0 || >=14.13.1}
     dependencies:
-      '@grammyjs/types': 3.0.3
+      '@grammyjs/types': 3.1.2
       abort-controller: 3.0.0
       debug: 4.3.4
-      node-fetch: 2.6.9
+      node-fetch: 2.6.11
     transitivePeerDependencies:
       - encoding
       - supports-color
@@ -6483,6 +6483,18 @@ packages:
     dev: true
     optional: true
 
+  /node-fetch@2.6.11:
+    resolution: {integrity: sha512-4I6pdBY1EthSqDmJkiNk3JIT8cswwR9nfeW/cPdUagJYEQG7R95WRH74wpz7ma8Gh/9dI9FP+OU+0E4FvtA55w==}
+    engines: {node: 4.x || >=6.0.0}
+    peerDependencies:
+      encoding: ^0.1.0
+    peerDependenciesMeta:
+      encoding:
+        optional: true
+    dependencies:
+      whatwg-url: 5.0.0
+    dev: false
+
   /node-fetch@2.6.7:
     resolution: {integrity: sha512-ZjMPFEfVx5j+y2yF35Kzx5sF7kDzxuDj6ziH4FFbOp87zKDZNx8yExJIb05OGF4Nlt9IHFIMBkRl41VdvcNdbQ==}
     engines: {node: 4.x || >=6.0.0}
@@ -6505,6 +6517,7 @@ packages:
         optional: true
     dependencies:
       whatwg-url: 5.0.0
+    dev: true
 
   /node-gyp-build@4.6.0:
     resolution: {integrity: sha512-NTZVKn9IylLwUzaKjkas1e4u2DLNcV4rdYagA4PWdPwW87Bi7z+BznyKSRwS/761tV/lzCGXplWsiaMjLqP2zQ==}
