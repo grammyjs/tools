@@ -10,6 +10,6 @@ defineEmits(["update:modelValue"]);
     type="text"
     autocomplete="off"
     class="rounded bg-translucentbackground p-2"
-    @input="$emit('update:modelValue', ($event.target as any).value)"
+    @input="$emit('update:modelValue', ($event.target as HTMLInputElement).value)"
   />
 </template>

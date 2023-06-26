@@ -33,7 +33,7 @@ const allowDefault = () => emit("update:modelValue", DEFAULT_UPDATE_TYPES as any
           type="checkbox"
           class="checked:accent-grammy-600"
           :checked="allowedUpdates[updateType]"
-          @click="set(updateType, ($event.target as any).checked)"
+          @click="set(updateType, ($event.target as HTMLInputElement).checked)"
         />
         {{ snakeToTitleCase(updateType) }}
       </div>
