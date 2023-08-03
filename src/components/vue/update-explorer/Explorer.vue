@@ -200,8 +200,20 @@ onMounted(async () => {
         source-url="https://github.com/grammyjs/tools/blob/main/src/components/vue/update-explorer/Explorer.vue#L44"
       />
     </section>
-    <section class="flex flex-1 border-t">
-      <div class="w-52">
+    <section class="flex flex-1">
+      <div class="w-full flex-1 overflow-auto bg-altbackground p-0" style="max-height: 86.5vh">
+        <component
+          :is="Editor"
+          :mode="'text'"
+          read-only
+          class="jse h-full"
+          :navigation-bar="false"
+          :main-menu-bar="false"
+          :status-bar="false"
+          :model-value="selectedUpdate ? undecoratedSelectedUpdate : undefined"
+        />
+      </div>
+      <div class="jse w-52" style="border-top: var(--jse-main-border); background-color: var(--jse-background-color)">
         <div class="flex flex-row items-center justify-between border-b py-1 pl-2" v-if="updatesList.length">
           <button class="h-fit" @click="clearUpdates" title="Clear updates">
             <TrashIcon stroke="white" class="relative mr-2 h-5 w-5" />
@@ -220,18 +232,6 @@ onMounted(async () => {
             <a :href="update.url" download>Download media</a>
           </span>
         </div>
-      </div>
-      <div class="w-full flex-1 overflow-auto bg-altbackground p-0" style="max-height: 86.5vh">
-        <component
-          :is="Editor"
-          :mode="'text'"
-          read-only
-          class="jse h-full"
-          :navigation-bar="false"
-          :main-menu-bar="false"
-          :status-bar="false"
-          :model-value="selectedUpdate ? undecoratedSelectedUpdate : undefined"
-        />
       </div>
     </section>
   </main>

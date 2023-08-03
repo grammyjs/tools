@@ -136,3 +136,8 @@ code {
 .button {
   @apply self-end text-grammy-600 duration-75 enabled:cursor-pointer enabled:hover:opacity-50 disabled:cursor-not-allowed disabled:opacity-50;
 }
+
+.jse-main, .cm-scroller, .jse-text-mode, .jse-contents {
+  border-left: none !important;
+  border-bottom: none !important;
+}

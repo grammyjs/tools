@@ -167,7 +167,7 @@
     /* over all fonts, sizes, and colors */
     --jse-theme-color: #2f6dd0;
     --jse-theme-color-highlight: #467cd2;
-    --jse-background-color: #1e1e1e;
+    --jse-background-color: var(--grammy-background);
     --jse-text-color: #d4d4d4;
 
     /* main, menu, modal */
@@ -185,7 +185,7 @@
     --jse-tooltip-action-button-background: #737373;
 
     /* panels: navigation bar, gutter, search box */
-    --jse-panel-background: #333333;
+    --jse-panel-background: var(--altbackground);
     --jse-panel-background-border: 1px solid #464646;
     --jse-panel-color: var(--jse-text-color);
     --jse-panel-color-readonly: #737373;
