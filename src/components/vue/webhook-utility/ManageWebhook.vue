@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { computed, ref } from "vue";
-import GrammySwitch from "../GrammySwitch.vue";
 import AllowedUpdates from "./AllowedUpdates.vue";
 import { useApiMethod } from "./store";
 import { type UpdateTypes, DEFAULT_UPDATE_TYPES } from "./update-types";
@@ -67,16 +66,19 @@ const deleteWebhook = withRefresh(deleteWebhookRaw);
     <input type="checkbox" :checked="dropPendingUpdates" class="mt-5" />
     Drop pending updates
   </label>
-  <div class="flex flex-col mt-4">
+  <div class="mt-4 flex flex-col">
     <label for="allowedUpdates" class="font-bold">Allowed Updates</label>
     <allowed-updates id="allowedUpdates" v-model="newAllowedUpdates" />
   </div>
-  <div class="mt-5 flex flex-row justify-end">
-    <button class="button px-2 py-2 text-red-500" :loading="deleteWebhookState === 'loading'" @click="deleteWebhook">
-      Delete Webhook
-    </button>
-    <button class="button py-2 pl-2" :disabled="!canSet" :loading="setWebhookState === 'loading'" @click="setWebhook">
-      Save Changes
-    </button>
+  <div class="mt-5 flex w-full justify-between">
+    <button class="button py-2 pr-2" @click="() => $emit('clearToken')">Change Token</button>
+    <div>
+      <button class="button px-2 py-2 text-red-500" :loading="deleteWebhookState === 'loading'" @click="deleteWebhook">
+        Delete Webhook
+      </button>
+      <button class="button py-2 pl-2" :disabled="!canSet" :loading="setWebhookState === 'loading'" @click="setWebhook">
+        Save Changes
+      </button>
+    </div>
   </div>
 </template>

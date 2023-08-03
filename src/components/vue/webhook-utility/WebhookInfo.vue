@@ -3,9 +3,6 @@ import { useTelegramApi } from "grammy-vue";
 import type { UserFromGetMe } from "grammy/types";
 import { onMounted, ref, toRefs, watch } from "vue";
 import ErrorMessage from "../ErrorMessage.vue";
-import GrammyButton from "../GrammyButton.vue";
-import LeftArrowIcon from "../icons/LeftArrowIcon.vue";
-import RefreshIcon from "../icons/RefreshIcon.vue";
 import ManageWebhook from "./ManageWebhook.vue";
 
 const emit = defineEmits(["clearToken", "reload"]);
