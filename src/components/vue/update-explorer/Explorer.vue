@@ -170,7 +170,7 @@ onMounted(async () => {
       </div>
     </div>
     <div class="px-4">
-      <section class="mx-auto flex w-full max-w-screen-sm flex-col items-center justify-center">
+      <section class="mx-auto flex w-full max-w-screen-sm flex-col justify-center">
         <a
           v-if="!stateIs('idle', 'stopped') && username != ''"
           :href="`https://t.me/${username}`"
@@ -223,15 +223,19 @@ onMounted(async () => {
       </div>
       <div class="jse w-52" style="border-top: var(--jse-main-border); background-color: var(--jse-background-color)">
         <div class="flex flex-row items-center justify-between border-b py-1 pl-2" v-if="updatesList.length">
+          <span></span>
           <button class="h-fit" @click="clearUpdates" title="Clear updates">
-            <TrashIcon stroke="white" class="relative mr-2 h-5 w-5" />
+            <TrashIcon stroke="currentColor" class="relative mr-2 h-5 w-5" />
           </button>
         </div>
         <div
           v-for="update in updatesList"
           :key="update.update_id"
-          class="m-0 flex w-full flex-col border-b p-3 text-sm text-black dark:text-white"
-          :class="{ ['bg-gray-800']: selectedUpdateId === update.update_id }"
+          class="m-0 flex w-full cursor-pointer flex-col border-b p-3 text-sm text-black dark:text-white duration-75"
+          :class="{
+            ['bg-altbackground dark:bg-gray-800']: selectedUpdateId === update.update_id,
+            'hover:opacity-50': selectedUpdateId !== update.update_id,
+          }"
           @click="selectedUpdateId = update.update_id"
         >
           <span>{{ update.type }}</span>
