@@ -32,7 +32,7 @@ const selectedUpdate = computed(() => (selectedUpdateId.value ? updatesMap.get(s
 const undecoratedSelectedUpdate = computed(() =>
   selectedUpdate.value
     ? (({ type, timestamp, hasDownload, url, ...update }: DecoratedUpdate) => update)(selectedUpdate.value)
-    : undefined
+    : undefined,
 );
 const clearUpdates = () => {
   updatesList.value = [];
@@ -143,7 +143,7 @@ const formatDate = (date: Date) =>
     second: "2-digit",
   });
 
-const Editor = shallowRef<typeof Empty | typeof import("json-editor-vue")["default"]>(Empty);
+const Editor = shallowRef<typeof Empty | (typeof import("json-editor-vue"))["default"]>(Empty);
 onMounted(async () => {
   const component = await import("json-editor-vue");
   Editor.value = component.default;
@@ -171,15 +171,12 @@ onMounted(async () => {
     </div>
     <div class="px-4">
       <section class="mx-auto flex w-full max-w-screen-sm flex-col">
-        <a
-          v-if="!stateIs('idle', 'stopped') && username != ''"
-          :href="`https://t.me/${username}`"
-          class="absolute top-2 flex h-[44px] items-center justify-center self-end text-center text-sm opacity-50"
-          target="_blank"
-          rel="noopener noreferrer"
+        <div
+          class="absolute top-2 flex h-[44px] items-center justify-center self-end"
+          v-if="stateIs('listening', 'initializing', 'stopping')"
         >
-          @{{ username }}
-        </a>
+          <div class="blink h-3 w-3 rounded-full bg-black dark:bg-white"></div>
+        </div>
         <div class="relative w-full max-w-screen-sm">
           <button
             type="button"
@@ -188,24 +185,26 @@ onMounted(async () => {
             @click="toggleListening()"
           >
             <StartIcon class="h-6 w-6" v-if="stateIs('idle', 'stopped', 'error')" />
-            <div
-              class="blink h-4 w-4 rounded-full bg-black dark:bg-white"
-              v-if="stateIs('listening', 'initializing', 'stopping')"
-            ></div>
           </button>
-          <div
-            v-if="!stateIs('idle', 'stopped')"
-            class="w-full overflow-auto bg-altbackground p-3 outline-none placeholder:opacity-80 focus:outline-none disabled:text-gray-500 dark:placeholder:opacity-50"
-          >
-            {{ stateLabel }}
+          <div v-if="!stateIs('idle', 'stopped')" class="flex justify-between pt-3">
+            <div>{{ stateLabel }}</div>
+            <a
+              v-if="!stateIs('idle', 'stopped') && username != ''"
+              :href="`https://t.me/${username}`"
+              class="opacity-50 duration-75 hover:text-grammy-600 hover:opacity-100"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              @{{ username }}
+            </a>
           </div>
           <input
             v-if="stateIs('idle', 'stopped')"
             id="token"
             v-model="token"
-            type="text"
+            type="password"
             placeholder="Bot token"
-            :class="{ input: true, 'input-spoiler': token.length > 20 }"
+            class="input"
           />
         </div>
         <token-disclaimer
@@ -236,7 +235,7 @@ onMounted(async () => {
         <div
           v-for="update in updatesList"
           :key="update.update_id"
-          class="m-0 flex w-full flex-col border-b p-3 text-sm text-white"
+          class="m-0 flex w-full flex-col border-b p-3 text-sm text-black dark:text-white"
           :class="{ ['bg-gray-800']: selectedUpdateId === update.update_id }"
           @click="selectedUpdateId = update.update_id"
         >
