@@ -110,3 +110,13 @@ code {
   font-family: "Source Code Pro", Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono,
     Bitstream Vera Sans Mono, Courier New, monospace;
 }
+
+.blink {
+  animation: blink 750ms infinite;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}

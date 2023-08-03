@@ -3,7 +3,6 @@ import type { Update } from "grammy/types";
 import { Bot } from "grammy/web";
 import { computed, onMounted, ref, shallowRef, watch } from "vue";
 import StartIcon from "../icons/StartIcon.vue";
-import StopIcon from "../icons/StopIcon.vue";
 import TrashIcon from "../icons/TrashIcon.vue";
 import Empty from "./Empty.vue";
 import TokenDisclaimer from "../TokenDisclaimer.vue";
@@ -125,11 +124,11 @@ const stateLabel = computed(() => {
     case "error":
       return "Error";
     case "initializing":
-      return "Initializing";
+      return "Starting...";
     case "listening":
-      return `Listening as @${bot.value?.botInfo.username}`;
+      return "Listening to updates...";
     case "stopping":
-      return "Stopping";
+      return "Stopping...";
     default:
       return "Idle";
   }
@@ -173,32 +172,36 @@ onMounted(async () => {
         <button
           type="button"
           :disabled="isBusy || !hasToken"
-          class="absolute bottom-10 right-9 flex cursor-pointer items-center disabled:cursor-wait disabled:opacity-30"
+          class="absolute bottom-0 right-3 top-0 my-auto flex cursor-pointer items-center disabled:cursor-not-allowed disabled:opacity-30"
           @click="toggleListening()"
-          :class="{ 'animate-blink': stateIs('listening') }"
         >
-          <StartIcon class="absolute h-7 w-7 stroke-green-500" v-if="stateIs('idle', 'stopped', 'error')" />
-          <StopIcon class="absolute h-7 w-7 stroke-red-500" v-if="stateIs('initializing', 'listening', 'stopping')" />
+          <StartIcon class="h-6 w-6" v-if="stateIs('idle', 'stopped', 'error')" />
+          <div class="blink h-4 w-4 rounded-full bg-black dark:bg-white" v-if="stateIs('listening', 'initializing', 'stopping')"></div>
         </button>
+        <div
+          v-if="!stateIs('idle', 'stopped')"
+          class="w-full overflow-auto bg-altbackground p-3 placeholder:opacity-80 focus:outline-none disabled:text-gray-500 dark:placeholder:opacity-50"
+        >
+          {{ stateLabel }}
+        </div>
         <input
-          :disabled="!stateIs('idle', 'stopped')"
+          v-if="stateIs('idle', 'stopped')"
           id="token"
           v-model="token"
           type="text"
           placeholder="Token obtained from talking to @botfather"
-          class="mb-4 w-full overflow-auto bg-altbackground p-3 placeholder:opacity-80 focus:outline-none disabled:text-gray-500 dark:placeholder:opacity-50"
+          class="w-full overflow-auto bg-altbackground p-3 placeholder:opacity-80 focus:outline-none disabled:text-gray-500 dark:placeholder:opacity-50"
         />
       </div>
       <token-disclaimer
         source-url="https://github.com/grammyjs/tools/blob/main/src/components/vue/update-explorer/Explorer.vue#L44"
-        class="mb-4"
+        class="my-4"
       />
     </section>
     <section class="flex flex-1 border-t">
       <div class="w-52">
-        <div class="flex flex-row items-center justify-between border-b py-1 pl-2">
-          <span>{{ stateLabel }}</span>
-          <button class="h-fit" @click="clearUpdates" v-if="updatesList.length" title="Clear updates">
+        <div class="flex flex-row items-center justify-between border-b py-1 pl-2" v-if="updatesList.length">
+          <button class="h-fit" @click="clearUpdates" title="Clear updates">
             <TrashIcon stroke="white" class="relative mr-2 h-5 w-5" />
           </button>
         </div>
