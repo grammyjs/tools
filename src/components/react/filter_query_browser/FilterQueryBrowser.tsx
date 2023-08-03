@@ -39,20 +39,13 @@ export default function FilterQueryBrowser() {
 
   return (
     <Main>
-      <p className="pb-4">
-        Here you can view and search through all of the available{" "}
-        <a className="link" href="https://grammy.dev/guide/filter-queries">
-          filter queries
-        </a>
-        , and know what kind of updates they filter.
-      </p>
       <input
         type="text"
         autoComplete="off"
         id="query"
         value={q}
         onChange={(e) => setQ(e.target.value)}
-        placeholder={`Search among ${filterQueries.length} filter queries...`}
+        placeholder={`Browse ${filterQueries.length} filter queries...`}
         className="w-full bg-altbackground p-3 placeholder:opacity-80 outlie-none focus:outline-none dark:placeholder:opacity-50"
       />
       <div className="py-4">{list(q)}</div>
