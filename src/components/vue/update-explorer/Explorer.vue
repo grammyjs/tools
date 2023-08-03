@@ -32,7 +32,7 @@ const selectedUpdate = computed(() => (selectedUpdateId.value ? updatesMap.get(s
 const undecoratedSelectedUpdate = computed(() =>
   selectedUpdate.value
     ? (({ type, timestamp, hasDownload, url, ...update }: DecoratedUpdate) => update)(selectedUpdate.value)
-    : undefined
+    : undefined,
 );
 const clearUpdates = () => {
   updatesList.value = [];
@@ -141,7 +141,7 @@ const formatDate = (date: Date) =>
     second: "2-digit",
   });
 
-const Editor = shallowRef<typeof Empty | typeof import("json-editor-vue")["default"]>(Empty);
+const Editor = shallowRef<typeof Empty | (typeof import("json-editor-vue"))["default"]>(Empty);
 onMounted(async () => {
   const component = await import("json-editor-vue");
   Editor.value = component.default;

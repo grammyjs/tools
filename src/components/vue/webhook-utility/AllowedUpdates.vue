@@ -6,7 +6,7 @@ const props = defineProps<{ modelValue: UpdateTypes[] }>();
 const emit = defineEmits<{ (event: "update:modelValue", allowedUpdates: UpdateTypes[]): void }>();
 
 const allowedUpdates = computed(() =>
-  Object.fromEntries(ALL_UPDATE_TYPES.map((updateType) => [updateType, props.modelValue.includes(updateType)]))
+  Object.fromEntries(ALL_UPDATE_TYPES.map((updateType) => [updateType, props.modelValue.includes(updateType)])),
 );
 
 const set = (updateType: string, value: boolean) => {
@@ -15,7 +15,7 @@ const set = (updateType: string, value: boolean) => {
     "update:modelValue",
     Object.entries(allowedUpdates.value)
       .filter(([_, allowed]) => Boolean(allowed))
-      .map(([updateType]) => updateType as UpdateTypes)
+      .map(([updateType]) => updateType as UpdateTypes),
   );
 };
 

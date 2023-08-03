@@ -21,7 +21,7 @@ const clearToken = () => {
       </error-message>
       <button
         :disabled="disableLoadBotInfo"
-        class="absolute top-2 h-[44px] button"
+        class="button absolute top-2 h-[44px]"
         type="submit"
         @click.prevent="getMe"
         :loading="state === 'loading'"
@@ -29,13 +29,7 @@ const clearToken = () => {
         Load Info
       </button>
       <form>
-        <input
-          v-model="token"
-          id="token"
-          :disabled="state === 'loading'"
-          placeholder="Bot token"
-          class="input"
-        />
+        <input v-model="token" id="token" :disabled="state === 'loading'" placeholder="Bot token" class="input" />
         <token-disclaimer
           source-url="https://github.com/grammyjs/tools/blob/main/src/components/vue/composables/persistentRef.ts"
         />

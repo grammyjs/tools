@@ -9,7 +9,7 @@ const props = withDefaults(
   {
     variant: ColorVariant.DEFAULT,
     size: "regular",
-  }
+  },
 );
 
 const { disabled, variant, size } = toRefs(props);

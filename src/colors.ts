@@ -4,7 +4,7 @@ type EnumOf<T extends string> = { [k in T as Uppercase<k>]: Lowercase<k> };
 export const COLOR_VARIANTS = ["default", "primary", "danger", "success"] as const;
 export type ColorVariant = (typeof COLOR_VARIANTS)[number];
 export const ColorVariant = Object.fromEntries(
-  COLOR_VARIANTS.map((variant) => [variant.toUpperCase(), variant])
+  COLOR_VARIANTS.map((variant) => [variant.toUpperCase(), variant]),
 ) as EnumOf<ColorVariant>;
 
 export const VARIANT_COLORS = {

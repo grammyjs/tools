@@ -107,8 +107,16 @@ h6 {
 
 pre,
 code {
-  font-family: "Source Code Pro", Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono,
-    Bitstream Vera Sans Mono, Courier New, monospace;
+  font-family:
+    "Source Code Pro",
+    Menlo,
+    Monaco,
+    Lucida Console,
+    Liberation Mono,
+    DejaVu Sans Mono,
+    Bitstream Vera Sans Mono,
+    Courier New,
+    monospace;
 }
 
 .blink {
@@ -126,5 +134,5 @@ code {
 }
 
 .button {
-  @apply enabled:cursor-pointer disabled:cursor-not-allowed disabled:opacity-50 self-end text-grammy-600 duration-75 enabled:hover:opacity-50;
+  @apply self-end text-grammy-600 duration-75 enabled:cursor-pointer enabled:hover:opacity-50 disabled:cursor-not-allowed disabled:opacity-50;
 }

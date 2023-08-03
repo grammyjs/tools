@@ -94,7 +94,7 @@ export function generate() {
         : L1.map((k1) =>
             L2.map((k2) => {
               return `ctx.${CONTEXT_SHORTCUTS[k1]}.${k2}.${L3};`;
-            }).join("\n")
+            }).join("\n"),
           ).join("\n");
 
       doc = (
