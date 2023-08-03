@@ -148,7 +148,7 @@ onMounted(async () => {
 });
 </script>
 <template>
-  <main class="flex flex-1 flex-col bg-translucentbackground">
+  <main class="flex flex-1 flex-col bg-translucentbackground px-4">
     <div
       v-if="error"
       class="fixed inset-0 z-50 flex h-screen w-screen items-center justify-center overflow-y-auto bg-gray-600 bg-opacity-50"
