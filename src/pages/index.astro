@@ -14,6 +14,12 @@ import Layout from "../layouts/Layout.astro";
       </a>
     ))}
   </main>
+  <div class="h-[calc(100vh-60px-40px-40px-40px)]"></div>
+  <footer class="bg-background px-4 pb-10 pt-4 text-xs">
+    <div class="mx-auto flex w-full max-w-screen-sm justify-between gap-5">
+      <p class="opacity-50">&copy; {new Date().getUTCFullYear()} grammyjs</p> <a href="https://github.com/grammyjs/tools" class="text-grammy-600">Source Code</a>
+    </div>
+  </footer>
 </Layout>
 
 <style>
