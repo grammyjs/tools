@@ -16,15 +16,17 @@ const list = (q: string) =>
           <summary className="mb-2 cursor-pointer select-none">
             <a href={`#${slug(query)}`}></a>
             <h3 className="inline-block font-mono" id={`${slug(query)}`}>
-              {q == "" ? (
-                query
-              ) : (
-                <>
-                  {query.slice(0, query.indexOf(q))}
-                  <span className="text-grammy">{q}</span>
-                  {query.slice(query.indexOf(q) + q.length)}
-                </>
-              )}
+              {q == ""
+                ? (
+                  query
+                )
+                : (
+                  <>
+                    {query.slice(0, query.indexOf(q))}
+                    <span className="text-grammy">{q}</span>
+                    {query.slice(query.indexOf(q) + q.length)}
+                  </>
+                )}
             </h3>
           </summary>
           <div className="b-l mx-2 my-2 p-4">{doc}</div>

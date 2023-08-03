@@ -226,7 +226,7 @@ onMounted(async () => {
           :is="Editor"
           :mode="'text'"
           read-only
-          class="jse-theme-dark h-full"
+          class="jse h-full"
           :navigation-bar="false"
           :main-menu-bar="false"
           :status-bar="false"
