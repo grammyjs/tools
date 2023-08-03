@@ -138,5 +138,5 @@ code {
 }
 
 .input-spoiler {
-  @apply blur-[3px] duration-100 focus:blur-none;
+  @apply blur-[3px] duration-100 hover:blur-none;
 }
