@@ -107,16 +107,8 @@ h6 {
 
 pre,
 code {
-  font-family:
-    "Source Code Pro",
-    Menlo,
-    Monaco,
-    Lucida Console,
-    Liberation Mono,
-    DejaVu Sans Mono,
-    Bitstream Vera Sans Mono,
-    Courier New,
-    monospace;
+  font-family: "Source Code Pro", Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono,
+    Bitstream Vera Sans Mono, Courier New, monospace;
 }
 
 .blink {
@@ -137,7 +129,14 @@ code {
   @apply self-end text-grammy-600 duration-75 enabled:cursor-pointer enabled:hover:opacity-50 disabled:cursor-not-allowed disabled:opacity-50;
 }
 
-.jse-main, .cm-scroller, .jse-text-mode, .jse-contents {
+.jse-main,
+.cm-scroller,
+.jse-text-mode,
+.jse-contents {
   border-left: none !important;
   border-bottom: none !important;
+}
+
+.input-spoiler {
+  @apply blur-[3px] duration-100 focus:blur-none;
 }

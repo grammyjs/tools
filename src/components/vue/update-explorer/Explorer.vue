@@ -172,7 +172,7 @@ onMounted(async () => {
         <button
           type="button"
           :disabled="isBusy || !hasToken"
-          class="absolute bottom-0 right-3 top-0 my-auto flex cursor-pointer items-center disabled:cursor-not-allowed disabled:opacity-30"
+          class="absolute bottom-0 right-3 top-0 z-[100] my-auto flex cursor-pointer items-center disabled:cursor-not-allowed disabled:opacity-30"
           @click="toggleListening()"
         >
           <StartIcon class="h-6 w-6" v-if="stateIs('idle', 'stopped', 'error')" />
@@ -192,15 +192,16 @@ onMounted(async () => {
           id="token"
           v-model="token"
           type="text"
-          placeholder="Token obtained from talking to @botfather"
-          class="w-full overflow-auto bg-altbackground p-3 placeholder:opacity-80 focus:outline-none disabled:text-gray-500 dark:placeholder:opacity-50"
+          placeholder="Bot token"
+          :class="{ input: true, 'input-spoiler': token.length > 20  }"
         />
       </div>
       <token-disclaimer
+        v-if="stateIs('idle', 'stopped')"
         source-url="https://github.com/grammyjs/tools/blob/main/src/components/vue/update-explorer/Explorer.vue#L44"
       />
     </section>
-    <section class="flex flex-1">
+    <section class="mt-5 flex flex-1" v-if="!stateIs('idle')">
       <div class="w-full flex-1 overflow-auto bg-altbackground p-0" style="max-height: 86.5vh">
         <component
           :is="Editor"

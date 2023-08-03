@@ -11,6 +11,8 @@ const clearToken = () => {
   token.value = "";
   state.value = "idle";
 };
+
+const shouldBlur = computed(() => token != "");
 </script>
 
 <template>
@@ -29,7 +31,13 @@ const clearToken = () => {
         Load Info
       </button>
       <form>
-        <input v-model="token" id="token" :disabled="state === 'loading'" placeholder="Bot token" class="input" />
+        <input
+          v-model="token"
+          id="token"
+          :disabled="state === 'loading'"
+          placeholder="Bot token"
+          :class="{ input: true, 'input-spoiler': token.length > 20 }"
+        />
         <token-disclaimer
           source-url="https://github.com/grammyjs/tools/blob/main/src/components/vue/composables/persistentRef.ts"
         />
