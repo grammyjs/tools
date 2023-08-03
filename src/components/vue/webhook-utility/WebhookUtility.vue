@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import { computed } from "vue";
 import ErrorMessage from "../ErrorMessage.vue";
-import GrammyButton from "../GrammyButton.vue";
-import GrammyTextInput from "../GrammyTextInput.vue";
 import WebhookInfo from "./WebhookInfo.vue";
 import TokenDisclaimer from "../TokenDisclaimer.vue";
 import { token, useApiMethod } from "./store";
@@ -16,44 +14,37 @@ const clearToken = () => {
 </script>
 
 <template>
-  <div class="container mx-auto my-auto xl:px-52">
-    <div class="rounded bg-altbackground p-10">
-      <div v-show="state !== 'success'">
-        <error-message class="mb-5" v-if="state === 'error'">
-          Something went wrong when calling the <span class="font-bold">getMe</span> API method. Try checking your
-          token.
-        </error-message>
-        <form>
-          <label for="token">Bot Token</label>
-          <grammy-text-input
-            v-model="token"
-            id="token"
-            type="text"
-            placeholder="Given to you by @botfather"
-            class="mt-2 w-full"
-            :disabled="state === 'loading'"
-          />
-          <token-disclaimer
-            source-url="https://github.com/grammyjs/tools/blob/main/src/components/vue/composables/persistentRef.ts"
-            class="mt-4"
-          />
-          <div class="flex flex-row justify-end">
-            <grammy-button
-              :disabled="disableLoadBotInfo"
-              class="mt-3"
-              type="submit"
-              @click.prevent="getMe"
-              :loading="state === 'loading'"
-              variant="primary"
-            >
-              load bot info
-            </grammy-button>
-          </div>
-        </form>
-      </div>
-      <div v-if="state === 'success'">
-        <webhook-info @clear-token="() => clearToken()" @reload="getMe" :bot-info="botInfo" :token="token" />
-      </div>
+  <main class="mx-auto flex w-full max-w-screen-sm flex-col">
+    <div v-show="state !== 'success'" class="flex flex-col">
+      <error-message class="mb-5" v-if="state === 'error'">
+        Something went wrong when calling the <span class="font-bold">getMe</span> API method. Try checking your token.
+      </error-message>
+      <button
+        :disabled="disableLoadBotInfo"
+        class="absolute top-2 h-[44px] button"
+        type="submit"
+        @click.prevent="getMe"
+        :loading="state === 'loading'"
+      >
+        Load Info
+      </button>
+      <form>
+        <input
+          v-model="token"
+          id="token"
+          :disabled="state === 'loading'"
+          placeholder="Bot token"
+          class="input"
+        />
+        <token-disclaimer
+          source-url="https://github.com/grammyjs/tools/blob/main/src/components/vue/composables/persistentRef.ts"
+          class="px-1 py-2"
+        />
+        <div class="flex flex-row justify-end"></div>
+      </form>
     </div>
-  </div>
+    <div v-if="state === 'success'">
+      <webhook-info @clear-token="() => clearToken()" @reload="getMe" :bot-info="botInfo" :token="token" />
+    </div>
+  </main>
 </template>

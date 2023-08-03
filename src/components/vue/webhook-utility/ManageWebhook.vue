@@ -1,10 +1,6 @@
 <script setup lang="ts">
 import { computed, ref } from "vue";
-import GrammyButton from "../GrammyButton.vue";
 import GrammySwitch from "../GrammySwitch.vue";
-import GrammyTextInput from "../GrammyTextInput.vue";
-import CheckIcon from "../icons/CheckIcon.vue";
-import TrashIcon from "../icons/TrashIcon.vue";
 import AllowedUpdates from "./AllowedUpdates.vue";
 import { useApiMethod } from "./store";
 import { type UpdateTypes, DEFAULT_UPDATE_TYPES } from "./update-types";
@@ -62,29 +58,25 @@ const deleteWebhook = withRefresh(deleteWebhookRaw);
     {{ setWebhookError || deleteWebhookError }}
   </div>
   <div class="mb-5 flex flex-col">
-    <label for="url" class="mr-2">Webhook URL</label>
-    <grammy-text-input class="mt-2" v-model="newUrl" type="text" id="url" />
+    <input class="input" v-model="newUrl" type="text" placeholder="Webhook URL" id="url" />
   </div>
-  <div class="mb-5 flex flex-col">
-    <label for="secret" class="mr-2">Webhook secret <span class="text-xs">(optional)</span></label>
-    <grammy-text-input class="mt-2" id="secret" type="password" v-model="secret" />
+  <div class="mb-1 flex flex-col">
+    <input class="input mt-1.5" id="secret" type="password" placeholder="Webhook secret (optional)" v-model="secret" />
   </div>
-  <div class="flex flex-col">
-    <label for="allowedUpdates" class="mr-2">Allowed Updates</label>
-    <allowed-updates class="mt-2" id="allowedUpdates" v-model="newAllowedUpdates" />
-  </div>
-  <div class="flex flex-row justify-around">
-    <grammy-switch v-model="dropPendingUpdates" class="mt-5" id="drop_pending_updates">
-      Drop pending updates
-    </grammy-switch>
+  <label class="pl-2">
+    <input type="checkbox" :checked="dropPendingUpdates" class="mt-5" />
+    Drop pending updates
+  </label>
+  <div class="flex flex-col mt-4">
+    <label for="allowedUpdates" class="font-bold">Allowed Updates</label>
+    <allowed-updates id="allowedUpdates" v-model="newAllowedUpdates" />
   </div>
   <div class="mt-5 flex flex-row justify-end">
-    <grammy-button variant="danger" class="mr-2" :loading="deleteWebhookState === 'loading'" @click="deleteWebhook">
-      <trash-icon class="inline h-5 w-5 align-text-bottom" /> delete webhook
-    </grammy-button>
-    <grammy-button variant="success" :disabled="!canSet" :loading="setWebhookState === 'loading'" @click="setWebhook">
-      <check-icon class="inline h-5 w-5 align-text-bottom" />
-      set webhook
-    </grammy-button>
+    <button class="button px-2 py-2 text-red-500" :loading="deleteWebhookState === 'loading'" @click="deleteWebhook">
+      Delete Webhook
+    </button>
+    <button class="button py-2 pl-2" :disabled="!canSet" :loading="setWebhookState === 'loading'" @click="setWebhook">
+      Save Changes
+    </button>
   </div>
 </template>

@@ -120,3 +120,11 @@ code {
     opacity: 0;
   }
 }
+
+.input {
+  @apply w-full bg-altbackground p-3 placeholder:opacity-80 focus:outline-none dark:placeholder:opacity-50;
+}
+
+.button {
+  @apply enabled:cursor-pointer disabled:cursor-not-allowed disabled:opacity-50 self-end text-grammy-600 duration-75 enabled:hover:opacity-50;
+}

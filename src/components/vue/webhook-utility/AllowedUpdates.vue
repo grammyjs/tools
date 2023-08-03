@@ -1,7 +1,5 @@
 <script setup lang="ts">
-import GrammyButton from "../GrammyButton.vue";
 import { UpdateTypes, ALL_UPDATE_TYPES, DEFAULT_UPDATE_TYPES } from "./update-types";
-import { snakeToTitleCase } from "./case-utils";
 import { computed } from "vue";
 
 const props = defineProps<{ modelValue: UpdateTypes[] }>();
@@ -26,22 +24,24 @@ const allowNone = () => emit("update:modelValue", []);
 const allowDefault = () => emit("update:modelValue", DEFAULT_UPDATE_TYPES as any);
 </script>
 <template>
-  <div class="rounded bg-translucentbackground p-5">
-    <div class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-      <div v-for="updateType of ALL_UPDATE_TYPES">
-        <input
-          type="checkbox"
-          class="checked:accent-grammy-600"
-          :checked="allowedUpdates[updateType]"
-          @click="set(updateType, ($event.target as HTMLInputElement).checked)"
-        />
-        {{ snakeToTitleCase(updateType) }}
+  <div class="pl-2 pt-3">
+    <div class="flex flex-col">
+      <div v-for="updateType of [...ALL_UPDATE_TYPES].sort((a, b) => a.length - b.length)">
+        <label>
+          <input
+            type="checkbox"
+            class="checked:accent-grammy-600"
+            :checked="allowedUpdates[updateType]"
+            @click="set(updateType, ($event.target as HTMLInputElement).checked)"
+          />
+          {{ updateType }}
+        </label>
       </div>
     </div>
-    <div class="mt-3 flex justify-center">
-      <grammy-button size="small" @click="allowAll"> select all </grammy-button>
-      <grammy-button size="small" class="ms-2" @click="allowDefault"> select default </grammy-button>
-      <grammy-button size="small" class="ms-2" @click="allowNone"> select none </grammy-button>
+    <div class="mt-3 flex">
+      <button size="small" class="button py-1 pr-2 text-xs" @click="allowAll">All</button>
+      <button size="small" class="button px-2 py-1 text-xs" @click="allowDefault">Default</button>
+      <button size="small" class="button py-1 pl-2 text-xs" @click="allowNone">None</button>
     </div>
   </div>
 </template>
