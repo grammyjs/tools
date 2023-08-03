@@ -170,13 +170,16 @@ onMounted(async () => {
       </div>
     </div>
     <div class="px-4">
-      <section class="mx-auto flex w-full max-w-screen-sm flex-col">
-        <div
-          class="absolute top-2 flex h-[44px] items-center justify-center self-end"
-          v-if="stateIs('listening', 'initializing', 'stopping')"
+      <section class="mx-auto flex w-full max-w-screen-sm flex-col items-center justify-center">
+        <a
+          v-if="!stateIs('idle', 'stopped') && username != ''"
+          :href="`https://t.me/${username}`"
+          class="absolute top-2 flex h-[44px] items-center justify-center self-end text-center text-sm opacity-50 duration-75 hover:text-grammy-600 hover:opacity-100"
+          target="_blank"
+          rel="noopener noreferrer"
         >
-          <div class="blink h-3 w-3 rounded-full bg-black dark:bg-white"></div>
-        </div>
+          @{{ username }}
+        </a>
         <div class="relative w-full max-w-screen-sm">
           <button
             type="button"
@@ -186,17 +189,9 @@ onMounted(async () => {
           >
             <StartIcon class="h-6 w-6" v-if="stateIs('idle', 'stopped', 'error')" />
           </button>
-          <div v-if="!stateIs('idle', 'stopped')" class="flex justify-between pt-3">
+          <div v-if="!stateIs('idle', 'stopped')" class="flex items-center justify-between pt-3">
             <div>{{ stateLabel }}</div>
-            <a
-              v-if="!stateIs('idle', 'stopped') && username != ''"
-              :href="`https://t.me/${username}`"
-              class="opacity-50 duration-75 hover:text-grammy-600 hover:opacity-100"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              @{{ username }}
-            </a>
+            <div v-if="stateIs('listening')" class="blink h-3 w-3 rounded-full bg-black dark:bg-white"></div>
           </div>
           <input
             v-if="stateIs('idle', 'stopped')"
