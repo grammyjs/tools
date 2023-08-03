@@ -53,7 +53,7 @@ export default function FilterQueryBrowser() {
         value={q}
         onChange={(e) => setQ(e.target.value)}
         placeholder={`Search among ${filterQueries.length} filter queries...`}
-        className="w-full bg-altbackground p-3 placeholder:opacity-80 focus:outline-none dark:placeholder:opacity-50"
+        className="w-full bg-altbackground p-3 placeholder:opacity-80 outlie-none focus:outline-none dark:placeholder:opacity-50"
       />
       <div className="py-4">{list(q)}</div>
     </Main>

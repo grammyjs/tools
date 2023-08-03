@@ -183,7 +183,7 @@ onMounted(async () => {
         </button>
         <div
           v-if="!stateIs('idle', 'stopped')"
-          class="w-full overflow-auto bg-altbackground p-3 placeholder:opacity-80 focus:outline-none disabled:text-gray-500 dark:placeholder:opacity-50"
+          class="w-full overflow-auto bg-altbackground p-3 placeholder:opacity-80 outline-none focus:outline-none disabled:text-gray-500 dark:placeholder:opacity-50"
         >
           {{ stateLabel }}
         </div>
