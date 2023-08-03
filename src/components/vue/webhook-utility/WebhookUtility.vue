@@ -11,8 +11,6 @@ const clearToken = () => {
   token.value = "";
   state.value = "idle";
 };
-
-const shouldBlur = computed(() => token != "");
 </script>
 
 <template>
