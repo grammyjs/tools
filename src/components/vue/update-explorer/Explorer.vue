@@ -176,7 +176,10 @@ onMounted(async () => {
           @click="toggleListening()"
         >
           <StartIcon class="h-6 w-6" v-if="stateIs('idle', 'stopped', 'error')" />
-          <div class="blink h-4 w-4 rounded-full bg-black dark:bg-white" v-if="stateIs('listening', 'initializing', 'stopping')"></div>
+          <div
+            class="blink h-4 w-4 rounded-full bg-black dark:bg-white"
+            v-if="stateIs('listening', 'initializing', 'stopping')"
+          ></div>
         </button>
         <div
           v-if="!stateIs('idle', 'stopped')"
@@ -195,7 +198,6 @@ onMounted(async () => {
       </div>
       <token-disclaimer
         source-url="https://github.com/grammyjs/tools/blob/main/src/components/vue/update-explorer/Explorer.vue#L44"
-        class="my-4"
       />
     </section>
     <section class="flex flex-1 border-t">

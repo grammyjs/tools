@@ -38,7 +38,6 @@ const clearToken = () => {
         />
         <token-disclaimer
           source-url="https://github.com/grammyjs/tools/blob/main/src/components/vue/composables/persistentRef.ts"
-          class="px-1 py-2"
         />
         <div class="flex flex-row justify-end"></div>
       </form>
