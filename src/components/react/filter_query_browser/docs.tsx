@@ -1,6 +1,6 @@
 import { Fragment } from "react";
-import { L1_SHORTCUTS, L2_SHORTCUTS, UPDATE_KEYS } from "./filter.ts";
-import FILTER_QUERIES from "./mod.ts";
+import { L1_SHORTCUTS, L2_SHORTCUTS, UPDATE_KEYS } from "./filter";
+import FILTER_QUERIES from "./mod";
 
 const CONTEXT_SHORTCUTS: Record<string, string> = UPDATE_KEYS.reduce((prev, current) => {
   return { ...prev, [current]: camelCase(current, "_") };
@@ -11,7 +11,7 @@ function camelCase(str: string, separator: string) {
     str[0] +
     str
       .split(separator)
-      .map((w) => w[0].toUpperCase() + w.substring(1))
+      .map((w) => w![0]?.toUpperCase() + w.substring(1))
       .join("")
       .substring(1)
   );

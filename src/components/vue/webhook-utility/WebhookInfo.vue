@@ -96,7 +96,7 @@ onMounted(() => {
     <div class="webhook-stats my-5 grid grid-cols-2">
       <grammy-info title="pending updates count" :value="info.pending_update_count">
         <template #title>
-          <div class="text-sm font-light flex flex-col">
+          <div class="flex flex-col text-sm font-light">
             <span>pending update count</span>
             <span v-if="info.last_synchronization_error_date">
               last sync error at <span class="font-bold">{{ formatDate(info.last_synchronization_error_date) }}</span>
@@ -106,7 +106,7 @@ onMounted(() => {
       </grammy-info>
       <grammy-info title="last webhook error">
         <template #value>
-          <div class="font-bold flex flex-col">
+          <div class="flex flex-col font-bold">
             <span>{{ webhookInfo.last_error_message }}</span> <span>{{ formatDate(info.last_error_date) }}</span>
           </div>
         </template>

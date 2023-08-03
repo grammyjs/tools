@@ -22,8 +22,8 @@ module.exports = {
           700: "#008bb3",
           800: "#006380",
           900: "#003b4d",
-          950: "#00141a"
-        }
+          950: "#00141a",
+        },
       },
     },
   },
@@ -34,7 +34,7 @@ module.exports = {
       variants: ["hover", "active", "disabled"],
     },
     {
-      pattern: /p-\d+/
-    }
+      pattern: /p-\d+/,
+    },
   ],
 };
