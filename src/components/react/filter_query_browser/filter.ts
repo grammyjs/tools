@@ -24,14 +24,5 @@ export const L1_SHORTCUTS = {
 export const L2_SHORTCUTS = {
   "": ["entities", "caption_entities"],
   media: ["photo", "video"],
-  file: [
-    "photo",
-    "animation",
-    "audio",
-    "document",
-    "video",
-    "video_note",
-    "voice",
-    "sticker",
-  ],
+  file: ["photo", "animation", "audio", "document", "video", "video_note", "voice", "sticker"],
 };

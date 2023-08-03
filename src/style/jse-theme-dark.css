@@ -2,11 +2,11 @@
   --jse-theme: light;
 
   /* over all fonts, sizes, and colors */
-  --jse-font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu,
-    Cantarell, 'Helvetica Neue', sans-serif;
+  --jse-font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell,
+    "Helvetica Neue", sans-serif;
   /* "consolas" for Windows, "menlo" for Mac with fallback to "monaco", 'Ubuntu Mono' for Ubuntu */
   /* (at Mac this font looks too large at 14px, but 13px is too small for the font on Windows) */
-  --jse-font-family-mono: consolas, menlo, monaco, 'Ubuntu Mono', 'source-code-pro', monospace;
+  --jse-font-family-mono: consolas, menlo, monaco, "Ubuntu Mono", "source-code-pro", monospace;
   --jse-font-size-mono: 14px;
   --jse-font-size: 16px;
   --jse-font-size-text-mode-search: 80%;
@@ -159,8 +159,7 @@
   --jse-color-picker-border-box-shadow: #cbcbcb 0 0 0 1px;
 }
 
-
-@media (prefers-color-scheme:dark) {
+@media (prefers-color-scheme: dark) {
   .jse {
     --jse-theme: dark;
 

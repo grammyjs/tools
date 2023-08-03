@@ -1,12 +1,7 @@
 import { computed, Ref } from "vue";
 type EnumOf<T extends string> = { [k in T as Uppercase<k>]: Lowercase<k> };
 
-export const COLOR_VARIANTS = [
-  "default",
-  "primary",
-  "danger",
-  "success",
-] as const;
+export const COLOR_VARIANTS = ["default", "primary", "danger", "success"] as const;
 export type ColorVariant = (typeof COLOR_VARIANTS)[number];
 export const ColorVariant = Object.fromEntries(
   COLOR_VARIANTS.map((variant) => [variant.toUpperCase(), variant]),
@@ -19,5 +14,4 @@ export const VARIANT_COLORS = {
   success: "green",
 } satisfies { [v in ColorVariant]: string };
 
-export const useColorVariant = (variant: Ref<ColorVariant>) =>
-  computed(() => VARIANT_COLORS[variant.value]);
+export const useColorVariant = (variant: Ref<ColorVariant>) => computed(() => VARIANT_COLORS[variant.value]);

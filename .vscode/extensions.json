@@ -1,7 +1,3 @@
 {
-  "recommendations": [
-    "astro-build.astro-vscode",
-    "esbenp.prettier-vscode",
-    "vue.volar"
-  ]
+  "recommendations": ["astro-build.astro-vscode", "esbenp.prettier-vscode", "vue.volar"]
 }
