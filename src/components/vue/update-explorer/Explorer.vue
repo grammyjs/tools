@@ -192,7 +192,11 @@ onMounted(async () => {
           </button>
           <div v-if="!stateIs('idle', 'stopped')" class="flex items-center justify-between pt-3">
             <div>{{ stateLabel }}</div>
-            <div v-if="stateIs('listening')" class="blink h-3 w-3 rounded-full bg-black dark:bg-white"></div>
+            <div
+              @click="toggleListening()"
+              v-if="stateIs('listening')"
+              class="blink h-3 w-3 cursor-pointer rounded-full bg-black dark:bg-white"
+            ></div>
           </div>
           <input
             v-if="stateIs('idle', 'stopped')"
