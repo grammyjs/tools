@@ -42,6 +42,7 @@ const clearUpdates = () => {
 
 // Listening
 const token = ref("");
+const username = ref("");
 watch(token, (value) => {
   localStorage.setItem("token", JSON.stringify(value));
 });
@@ -82,7 +83,8 @@ const startListening = async () => {
       if (!selectedUpdateId.value) selectedUpdateId.value = ctx.update.update_id;
     });
 
-    await bot.value.api.getMe();
+    const me = await bot.value.api.getMe();
+    username.value = me.username;
     await bot.value.init();
     await bot.value.start({
       allowed_updates: [
@@ -148,7 +150,7 @@ onMounted(async () => {
 });
 </script>
 <template>
-  <main class="flex flex-1 flex-col bg-translucentbackground px-4">
+  <main class="flex flex-1 flex-col bg-translucentbackground">
     <div
       v-if="error"
       class="fixed inset-0 z-50 flex h-screen w-screen items-center justify-center overflow-y-auto bg-gray-600 bg-opacity-50"
@@ -167,41 +169,52 @@ onMounted(async () => {
         </div>
       </div>
     </div>
-    <section class="mx-auto w-full max-w-screen-sm">
-      <div class="relative w-full max-w-screen-sm">
-        <button
-          type="button"
-          :disabled="isBusy || !hasToken"
-          class="absolute bottom-0 right-3 top-0 z-[100] my-auto flex cursor-pointer items-center disabled:cursor-not-allowed disabled:opacity-30"
-          @click="toggleListening()"
+    <div class="px-4">
+      <section class="mx-auto flex w-full max-w-screen-sm flex-col">
+        <a
+          v-if="!stateIs('idle', 'stopped') && username != ''"
+          :href="`https://t.me/${username}`"
+          class="absolute top-2 flex h-[44px] items-center justify-center self-end text-center text-sm opacity-50"
+          target="_blank"
+          rel="noopener noreferrer"
         >
-          <StartIcon class="h-6 w-6" v-if="stateIs('idle', 'stopped', 'error')" />
+          @{{ username }}
+        </a>
+        <div class="relative w-full max-w-screen-sm">
+          <button
+            type="button"
+            :disabled="isBusy || !hasToken"
+            class="absolute bottom-0 right-3 top-0 z-[100] my-auto flex cursor-pointer items-center disabled:cursor-not-allowed disabled:opacity-30"
+            @click="toggleListening()"
+          >
+            <StartIcon class="h-6 w-6" v-if="stateIs('idle', 'stopped', 'error')" />
+            <div
+              class="blink h-4 w-4 rounded-full bg-black dark:bg-white"
+              v-if="stateIs('listening', 'initializing', 'stopping')"
+            ></div>
+          </button>
           <div
-            class="blink h-4 w-4 rounded-full bg-black dark:bg-white"
-            v-if="stateIs('listening', 'initializing', 'stopping')"
-          ></div>
-        </button>
-        <div
-          v-if="!stateIs('idle', 'stopped')"
-          class="w-full overflow-auto bg-altbackground p-3 placeholder:opacity-80 outline-none focus:outline-none disabled:text-gray-500 dark:placeholder:opacity-50"
-        >
-          {{ stateLabel }}
+            v-if="!stateIs('idle', 'stopped')"
+            class="w-full overflow-auto bg-altbackground p-3 outline-none placeholder:opacity-80 focus:outline-none disabled:text-gray-500 dark:placeholder:opacity-50"
+          >
+            {{ stateLabel }}
+          </div>
+          <input
+            v-if="stateIs('idle', 'stopped')"
+            id="token"
+            v-model="token"
+            type="text"
+            placeholder="Bot token"
+            :class="{ input: true, 'input-spoiler': token.length > 20 }"
+          />
         </div>
-        <input
+        <token-disclaimer
           v-if="stateIs('idle', 'stopped')"
-          id="token"
-          v-model="token"
-          type="text"
-          placeholder="Bot token"
-          :class="{ input: true, 'input-spoiler': token.length > 20  }"
+          source-url="https://github.com/grammyjs/tools/blob/main/src/components/vue/update-explorer/Explorer.vue#L44"
         />
-      </div>
-      <token-disclaimer
-        v-if="stateIs('idle', 'stopped')"
-        source-url="https://github.com/grammyjs/tools/blob/main/src/components/vue/update-explorer/Explorer.vue#L44"
-      />
-    </section>
-    <section class="mt-5 flex flex-1" v-if="!stateIs('idle')">
+      </section>
+    </div>
+    <section :class="{ 'mt-5': !stateIs('idle', 'stopped'), flex: true, 'flex-1': true }" v-if="!stateIs('idle')">
       <div class="w-full flex-1 overflow-auto bg-altbackground p-0" style="max-height: 86.5vh">
         <component
           :is="Editor"
