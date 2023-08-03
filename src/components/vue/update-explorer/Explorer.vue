@@ -141,6 +141,7 @@ const formatDate = (date: Date) =>
     hour: "2-digit",
     minute: "2-digit",
     second: "2-digit",
+    hour12: false,
   });
 
 const Editor = shallowRef<typeof Empty | (typeof import("json-editor-vue"))["default"]>(Empty);
@@ -222,26 +223,35 @@ onMounted(async () => {
         />
       </div>
       <div class="jse w-52" style="border-top: var(--jse-main-border); background-color: var(--jse-background-color)">
-        <div class="flex flex-row items-center justify-between border-b py-1 pl-2" v-if="updatesList.length">
+        <div
+          class="flex flex-row items-center justify-between border-b border-[rgba(0,0,0,.1)] py-1 pl-2 dark:border-[rgba(255,255,255,.1)]"
+          v-if="updatesList.length"
+        >
           <span></span>
           <button class="h-fit" @click="clearUpdates" title="Clear updates">
             <TrashIcon stroke="currentColor" class="relative mr-2 h-5 w-5" />
           </button>
         </div>
         <div
-          v-for="update in updatesList"
+          v-for="[i, update] in updatesList.entries()"
           :key="update.update_id"
-          class="m-0 flex w-full cursor-pointer flex-col border-b p-3 text-sm text-black dark:text-white duration-75"
+          class="m-0 flex flex w-full cursor-pointer flex-col flex-col gap-3 border-[rgba(0,0,0,.1)] p-3 text-sm text-black duration-75 dark:border-[rgba(255,255,255,.1)] dark:text-white [&:not(:last-child)]:border-b"
           :class="{
-            ['bg-altbackground dark:bg-gray-800']: selectedUpdateId === update.update_id,
+            ['bg-altbackground']: selectedUpdateId === update.update_id,
             'hover:opacity-50': selectedUpdateId !== update.update_id,
           }"
           @click="selectedUpdateId = update.update_id"
         >
-          <span>{{ update.type }}</span>
-          <span>{{ update.update_id }} - {{ formatDate(update.timestamp) }}</span>
+          <div class="flex justify-between gap-2 text-xs opacity-50">
+            <span class="select-none">#{{ i + 1 }}</span
+            ><span>{{ formatDate(update.timestamp) }}</span>
+          </div>
+          <div class="flex flex-col gap-1">
+            <span><span class="select-none">Type: </span>{{ update.type }}</span>
+            <span><span class="select-none">ID: </span>{{ update.update_id }}</span>
+          </div>
           <span class="cursor-pointer underline" v-if="update.hasDownload">
-            <a :href="update.url" download>Download media</a>
+            <a :href="update.url" download>Download Media</a>
           </span>
         </div>
       </div>
