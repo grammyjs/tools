@@ -43,7 +43,7 @@ onMounted(() => {
     </a>
 
     <div class="webhook-fields mt-5">
-      <manage-webhook @refresh="reload" :url="webhookInfo.url" :allowed-updates="webhookInfo.allowed_updates" />
+      <manage-webhook @clear-token="$emit('clearToken')" @refresh="reload" :url="webhookInfo.url" :allowed-updates="webhookInfo.allowed_updates" />
     </div>
   </div>
 </template>
