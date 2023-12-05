@@ -57,7 +57,7 @@ const deleteWebhook = withRefresh(deleteWebhookRaw);
     {{ setWebhookError || deleteWebhookError }}
   </div>
   <div class="mb-5 flex flex-col">
-    <input class="input" v-model="newUrl" type="text" placeholder="Webhook URL" id="url" />
+    <input class="input" v-model="newUrl" type="text" placeholder="Webhook URL" id="url" autocomplete="off" />
   </div>
   <div class="mb-1 flex flex-col">
     <input class="input mt-1.5" id="secret" type="password" placeholder="Webhook secret (optional)" v-model="secret" />
