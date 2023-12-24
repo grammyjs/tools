@@ -65,7 +65,7 @@ export function generate() {
         <div>
           <p>Query for filtering {L1T} update.</p>
           <p>Here is how you can access the information about the update:</p>
-          <pre className="b-rounded @dark:bg-gray-800 mt-3 w-full bg-gray-200 p-3">
+          <pre className="rounded-md dark:bg-gray-800 mt-3 w-full bg-gray-200 p-3">
             <code>{L1.map((k1) => `ctx.${CONTEXT_SHORTCUTS[k1]};`).join("\n")}</code>
           </pre>
         </div>
@@ -77,7 +77,7 @@ export function generate() {
             Query for filtering {L1T} update with the field {L2T}.
           </p>
           <p>Here is how you can access the properties of the field:</p>
-          <pre className="b-rounded @dark:bg-gray-800 mt-3 w-full bg-gray-200 p-3">
+          <pre className="rounded-md dark:bg-gray-800 mt-3 w-full bg-gray-200 p-3">
             <code>{L1.map((k1) => L2.map((k2) => `ctx.${CONTEXT_SHORTCUTS[k1]}.${k2};`).join("\n")).join("\n")}</code>
           </pre>
         </div>
@@ -106,7 +106,7 @@ export function generate() {
             Here is how you can access the{" "}
             {isEntity ? <span>entities of {L3T} type</span> : <span>{L3T} property</span>}:
           </p>
-          <pre className="b-rounded @dark:bg-gray-800 mt-3 w-full bg-gray-200 p-3">
+          <pre className="rounded-md dark:bg-gray-800 mt-3 w-full bg-gray-200 p-3">
             <code>{accessInfo}</code>
           </pre>
         </div>
