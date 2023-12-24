@@ -43,6 +43,7 @@ const clearUpdates = () => {
 // Listening
 const token = ref("");
 const username = ref("");
+
 watch(token, (value) => {
   localStorage.setItem("token", JSON.stringify(value));
 });
@@ -156,10 +157,14 @@ onMounted(async () => {
       v-if="error"
       class="fixed inset-0 z-50 flex h-screen w-screen items-center justify-center overflow-y-auto bg-gray-600 bg-opacity-50"
     >
-      <div class="w-96 rounded-md border-l-8 border-l-red-500 bg-altbackground p-5 shadow-lg">
+      <div class="max-w-min rounded-md border-l-8 border-l-red-500 bg-altbackground p-5 shadow-lg">
         <span class="text-lg font-bold">An error has occured</span>
         <p class="text-sm">There was an unexpected error. Check the details below:</p>
-        <pre class="mt-3 bg-background">{{ JSON.stringify(error, null, 2) }}</pre>
+        <pre class="mt-3 break-all bg-background" v-if="error.stack?.includes('getMe')">
+Invalid Bot token has been provided or a network problem has occured
+</pre
+        >
+        <pre class="mt-3 bg-background" v-else>{{ JSON.stringify(error, null, 2) }}</pre>
         <div class="flex w-full flex-row-reverse items-end">
           <button
             class="relative right-1 mt-4 rounded-md border bg-opacity-50 px-2 py-1 align-middle"
