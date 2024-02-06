@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { Update } from "grammy/types";
-import { Bot } from "grammy/web";
+import { API_CONSTANTS, Bot } from "grammy/web";
 import { computed, onMounted, ref, shallowRef, watch } from "vue";
 import StartIcon from "../icons/StartIcon.vue";
 import TrashIcon from "../icons/TrashIcon.vue";
@@ -87,22 +87,7 @@ const startListening = async () => {
     username.value = me.username;
     await bot.value.init();
     await bot.value.start({
-      allowed_updates: [
-        "message",
-        "edited_message",
-        "channel_post",
-        "edited_channel_post",
-        "inline_query",
-        "chosen_inline_result",
-        "callback_query",
-        "shipping_query",
-        "pre_checkout_query",
-        "poll",
-        "poll_answer",
-        "my_chat_member",
-        "chat_member",
-        "chat_join_request",
-      ],
+      allowed_updates: API_CONSTANTS.ALL_UPDATE_TYPES,
       onStart: () => {
         state.value = "listening";
       },
