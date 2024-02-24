@@ -1,6 +1,9 @@
 <script setup lang="ts">
-import { UpdateTypes, ALL_UPDATE_TYPES, DEFAULT_UPDATE_TYPES } from "./update-types";
+import { type ApiConstants, API_CONSTANTS } from "grammy";
 import { computed } from "vue";
+
+const { ALL_UPDATE_TYPES, DEFAULT_UPDATE_TYPES } = API_CONSTANTS;
+export type UpdateTypes = ApiConstants["ALL_UPDATE_TYPES"];
 
 const props = defineProps<{ modelValue: UpdateTypes[] }>();
 const emit = defineEmits<{ (event: "update:modelValue", allowedUpdates: UpdateTypes[]): void }>();
@@ -26,7 +29,7 @@ const allowDefault = () => emit("update:modelValue", DEFAULT_UPDATE_TYPES as any
 <template>
   <div class="pl-2 pt-3">
     <div class="flex flex-col">
-      <div v-for="updateType of [...ALL_UPDATE_TYPES].sort((a, b) => a.length - b.length)">
+      <div v-for="updateType of [...ALL_UPDATE_TYPES]">
         <label>
           <input
             type="checkbox"
