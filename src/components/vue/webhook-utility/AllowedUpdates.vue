@@ -26,7 +26,7 @@ const allowDefault = () => emit("update:modelValue", DEFAULT_UPDATE_TYPES as any
 <template>
   <div class="pl-2 pt-3">
     <div class="flex flex-col">
-      <div v-for="updateType of [...ALL_UPDATE_TYPES].sort((a, b) => a.length - b.length)">
+      <div v-for="updateType of [...ALL_UPDATE_TYPES]">
         <label>
           <input
             type="checkbox"

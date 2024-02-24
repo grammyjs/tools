@@ -1,9 +1,6 @@
-import { API_CONSTANTS } from "grammy/web";
-
-type AllUpdateTypes = (typeof API_CONSTANTS)["ALL_UPDATE_TYPES"];
-type DefaultUpdateTypes = Array<Omit<AllUpdateTypes[number], "chat_member">>;
+import { API_CONSTANTS, ApiConstants } from "grammy/web";
 
 export const ALL_UPDATE_TYPES = API_CONSTANTS.ALL_UPDATE_TYPES;
-export const DEFAULT_UPDATE_TYPES: DefaultUpdateTypes = ALL_UPDATE_TYPES.filter((t) => t !== "chat_member");
+export const DEFAULT_UPDATE_TYPES = API_CONSTANTS.DEFAULT_UPDATE_TYPES;
 
-export type UpdateTypes = (typeof ALL_UPDATE_TYPES)[number];
+export type UpdateTypes = ApiConstants["ALL_UPDATE_TYPES"];
